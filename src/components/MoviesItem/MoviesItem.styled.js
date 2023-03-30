@@ -32,7 +32,7 @@ export const MoviesImg = styled.img`
 
 export const CardTitle = styled.h3`
   max-width: 300px;
-  color: aqua;
+  color: var(--color);
   font-size: 14px;
   margin-bottom: 0;
   margin-top: auto;

@@ -7,7 +7,7 @@ import ButtonLoadMore from 'components/ButtonLoadMore/ButtonLoadMore';
 import Select from 'react-select';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFilm } from '@fortawesome/free-solid-svg-icons';
-
+import Container from 'components/Container/Container';
 function SearchByYears() {
   const [selectedYear, setSelectedYear] = useState(0);
   const [movies, setMovies] = useState([]);
@@ -53,38 +53,49 @@ function SearchByYears() {
   };
 
   return (
-    <div className={css.selectedWrapper}>
-      <div className={css.selectedYear}>
-        <label className={css.selectLabel} htmlFor="year-select">
-          Select a year:
-        </label>
-        <div className={css.selectWrapper}>
-          <Select
-            className={css.select}
-            classNamePrefix="react-select"
-            name="year-select"
-            id="year-select"
-            value={{ value: selectedYear, label: selectedYear }}
-            onChange={selectedOption => setSelectedYear(selectedOption.value)}
-            options={yearOptions.map(year => ({ value: year, label: year }))}
-            placeholder="Select a year"
-            menuPlacement="auto"
-          />
-          <div className={css.selectIcon}>
-            <FontAwesomeIcon icon={faFilm} />
+    <>
+      <Container>
+        <div className={css.selectedWrapper}>
+          <div className={css.selectedYear}>
+            <label className={css.selectLabel} htmlFor="year-select">
+              Select a year:
+            </label>
+            <div className={css.selectWrapper}>
+              <Select
+                className={css.select}
+                classNamePrefix="react-select"
+                name="year-select"
+                id="year-select"
+                value={{ value: selectedYear, label: selectedYear }}
+                onChange={selectedOption =>
+                  setSelectedYear(selectedOption.value)
+                }
+                options={yearOptions.map(year => ({
+                  value: year,
+                  label: year,
+                }))}
+                placeholder="Select a year"
+                menuPlacement="auto"
+              />
+              <div className={css.selectIcon}>
+                <FontAwesomeIcon icon={faFilm} />
+              </div>
+            </div>
           </div>
-        </div>
-      </div>
 
-      {movies.length > 0 ? (
-        <MoviesList movies={movies} />
-      ) : loading ? (
-        <p>Loading...</p>
-      ) : (
-        <p className={css.searchText}>Please select a year to see movies.</p>
-      )}
-      {showButton && <ButtonLoadMore hendleIncrement={hendleIncrement} />}
-    </div>
+          {movies.length > 0 ? (
+            <MoviesList movies={movies} />
+          ) : loading ? (
+            <p>Loading...</p>
+          ) : (
+            <p className={css.searchText}>
+              Please select a year to see movies.
+            </p>
+          )}
+          {showButton && <ButtonLoadMore hendleIncrement={hendleIncrement} />}
+        </div>
+      </Container>
+    </>
   );
 }
 

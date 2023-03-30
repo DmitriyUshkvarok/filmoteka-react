@@ -8,11 +8,9 @@
 }
 
 .moviesItem {
-    border: 1px solid gold;
+    border: 1px solid var(--border-color);
     border-radius: 5px;
     max-width: 320px;
     padding: 10px;
-    background: #232526;
-    background: -webkit-linear-gradient(to right, #414345, #232526);
-    background: linear-gradient(to right, #414345, #232526);
+    background: var(--background-movies-item);
 }

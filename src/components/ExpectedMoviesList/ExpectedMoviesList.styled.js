@@ -1,5 +1,6 @@
 import styled, { css } from 'styled-components';
 import { SwiperSlide } from 'swiper/react';
+import { AiFillFastForward, AiFillFastBackward } from 'react-icons/ai';
 
 export const ExpectedWrapper = styled.div`
   overflow: hidden;
@@ -18,10 +19,8 @@ export const NavigationButton = styled.div`
     height: 30px;
     padding: 5px;
     border-radius: 50%;
-    border: 3px solid aqua;
-    background: #232526;
-    background: -webkit-linear-gradient(to right, #414345, #232526);
-    background: linear-gradient(to right, #414345, #232526);
+    border: 3px solid var(--border-color);
+    background: var(--background-header);
     box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
     cursor: pointer;
   }
@@ -55,16 +54,21 @@ export const StyledSwiperSlide = styled(SwiperSlide)`
   max-width: 215px;
   height: 100%;
   background: #232526;
-  background: -webkit-linear-gradient(to right, #414345, #232526);
-  background: linear-gradient(to right, #414345, #232526);
+  background: var(--background-movies-item);
   padding: 5px;
   font-size: 14px;
-  color: aqua;
-  border: 1px solid gold;
+  color: var(--color);
+  border: 1px solid var(--border-color);
   border-radius: 5px;
   box-sizing: border-box;
 `;
 
+export const StyledAiFillFastForward = styled(AiFillFastForward)`
+  color: var(--color);
+`;
+export const StyledAiFillFastBackward = styled(AiFillFastBackward)`
+  color: var(--color);
+`;
 export const ImgExpectedWrapper = styled.div`
   overflow: hidden;
 `;

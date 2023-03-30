@@ -18,8 +18,9 @@ import {
   ExpectedTitle,
   ExpextedRating,
   ExpextedYear,
+  StyledAiFillFastForward,
+  StyledAiFillFastBackward,
 } from './ExpectedMoviesList.styled';
-import { AiFillFastForward, AiFillFastBackward } from 'react-icons/ai';
 
 const ExpectedMoviesList = () => {
   const [movies, setMovies] = useState([]);
@@ -108,10 +109,10 @@ const ExpectedMoviesList = () => {
                   }
                 )}
                 <NavigationButton className="swiper-button-next">
-                  <AiFillFastForward color="aqua" />
+                  <StyledAiFillFastForward />
                 </NavigationButton>
                 <NavigationButton className="swiper-button-prev">
-                  <AiFillFastBackward color="aqua" />
+                  <StyledAiFillFastBackward />
                 </NavigationButton>
               </Swiper>
             </ExpectedWrapper>

@@ -8,9 +8,25 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background: #000000;
-  background: -webkit-linear-gradient(to right, #434343, #000000);
-  background: linear-gradient(to right, #434343, #000000);
+  background: var(--background-body);
+}
+
+body[data-theme='dark'] {
+  --background-body: linear-gradient(to right, #E7E9BB, #403B4A);
+  --background-header: linear-gradient(to right, #efefbb, #d4d3dd);
+  --background-movies-item: linear-gradient(to right, #efefbb, #d4d3dd);
+  --color: gray;
+  --border-color: gray;
+  --transition: 0.4s;
+}
+
+body[data-theme='light'] {
+  --background-body: linear-gradient(to right, #434343, #000000);
+  --background-header: linear-gradient(to right, #414345, #232526);
+  --background-movies-item: linear-gradient(to right, #414345, #232526);
+  --color: aqua;
+  --border-color: gold;
+  --transition: 0.4s;
 }
 
 code {

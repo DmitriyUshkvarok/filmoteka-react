@@ -1,14 +1,17 @@
 import { useSelector, useDispatch } from 'react-redux';
 import { FaSun, FaMoon } from 'react-icons/fa';
 import { toggleTheme } from 'redux/themeSlice';
-import { lightTheme, darkTheme } from 'styles';
 import css from './ThemeSwitcher.module.css';
+import { useEffect } from 'react';
 
 const ThemeSwitcher = () => {
   const dispatch = useDispatch();
   const isDarkMode = useSelector(state => state.theme.isDarkMode);
-  // eslint-disable-next-line no-unused-vars
-  const theme = isDarkMode ? darkTheme : lightTheme;
+  const theme = isDarkMode ? 'dark' : 'light';
+
+  useEffect(() => {
+    document.body.setAttribute('data-theme', theme);
+  }, [theme]);
 
   const handleThemeToggle = () => {
     dispatch(toggleTheme());

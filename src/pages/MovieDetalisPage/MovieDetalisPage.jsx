@@ -13,6 +13,8 @@ function MovieDetalis() {
   const { movieId } = useParams();
   const location = useLocation();
   const [movie, setMovie] = useState([]);
+  const [favorites, setFavorites] = useState([]);
+  const [isFavorite, setIsFavorite] = useState(false);
   const [trailerId, setTrailerId] = useState(null);
   const [urlModal, setUrlModal] = useState(false);
 
@@ -30,6 +32,40 @@ function MovieDetalis() {
         toast.error('No trailer available for this movie.');
       }
     });
+  }
+
+  useEffect(() => {
+    const favoritesFromStorage = localStorage.getItem('favorites');
+    if (favoritesFromStorage) {
+      setFavorites(JSON.parse(favoritesFromStorage));
+    }
+  }, []);
+
+  useEffect(() => {
+    setIsFavorite(favorites.some(fav => fav.id === movie.id));
+  }, [favorites, movie.id]);
+
+  function toggleFavorites() {
+    const movieToAdd = {
+      id: movie.id,
+      title: movie.title,
+      poster_path: movie.poster_path,
+      vote_average: movie.vote_average.toFixed(1),
+      release_date: movie.release_date.slice(0, 4),
+    };
+    if (isFavorite) {
+      const newFavorites = favorites.filter(fav => fav.id !== movie.id);
+      setFavorites(newFavorites);
+      localStorage.setItem('favorites', JSON.stringify(newFavorites));
+      setIsFavorite(false);
+      toast.success('Film removed from the library');
+    } else {
+      const newFavorites = [...favorites, movieToAdd];
+      setFavorites(newFavorites);
+      localStorage.setItem('favorites', JSON.stringify(newFavorites));
+      setIsFavorite(true);
+      toast.success('Film added to the library');
+    }
   }
 
   useEffect(() => {
@@ -71,15 +107,6 @@ function MovieDetalis() {
     <>
       {movie && (
         <section className={css.detalis}>
-          <img
-            className={css.posterMovie}
-            src={
-              movie.backdrop_path
-                ? `https://image.tmdb.org/t/p/w500/${movie.backdrop_path}`
-                : posterimg
-            }
-            alt={movie.title}
-          />
           <Container>
             <div className={css.btnBackDetalisWrapper}>
               <Link to={backLink}>
@@ -87,6 +114,15 @@ function MovieDetalis() {
               </Link>
             </div>
             <div className={css.detalisWrapper}>
+              <img
+                className={css.posterMovie}
+                src={
+                  movie.backdrop_path
+                    ? `https://image.tmdb.org/t/p/w500/${movie.backdrop_path}`
+                    : posterimg
+                }
+                alt={movie.title}
+              />
               <div className={css.columnInfo}>
                 <h2 className={css.infoTitle}>
                   {movie.title ? movie.title : 'Movie without a title'}
@@ -104,6 +140,34 @@ function MovieDetalis() {
                       <li key={id}>{name}</li>
                     ))}
                 </ul>
+                <ul className={css.reviewList}>
+                  <li className={css.reviewiLstItem}>
+                    <Link to="cast" state={location.state} className={css.cast}>
+                      Cast
+                    </Link>
+                  </li>
+
+                  <li className={css.reviewiLstItem}>
+                    <Link
+                      to="review"
+                      state={location.state}
+                      className={css.review}
+                    >
+                      Rewiew
+                    </Link>
+                  </li>
+                  <li className={css.reviewiLstItem}>
+                    <button
+                      type="button"
+                      className={css.addMoviesBtn}
+                      onClick={toggleFavorites}
+                    >
+                      {isFavorite
+                        ? 'Remove from library'
+                        : 'Add movie to library'}
+                    </button>
+                  </li>
+                </ul>
               </div>
               <div className={css.columnImg}>
                 <img
@@ -118,7 +182,7 @@ function MovieDetalis() {
                   style={{ cursor: 'pointer' }}
                   onClick={handleFetchTrailer}
                 />
-                {urlModal && trailerId ? (
+                {urlModal && (
                   <div className={css.videoBackdrop} onClick={clickBackdrop}>
                     <GiReturnArrow
                       className={css.iconBackModal}
@@ -145,24 +209,10 @@ function MovieDetalis() {
                       }}
                     />
                   </div>
-                ) : (
-                  <p>No trailer available for this movie.</p>
                 )}
               </div>
             </div>
-            <ul className={css.reviewList}>
-              <li className={css.reviewiLstItem}>
-                <Link to="cast" state={location.state} className={css.cast}>
-                  Cast
-                </Link>
-              </li>
 
-              <li className={css.reviewiLstItem}>
-                <Link to="review" state={location.state} className={css.review}>
-                  Rewiew
-                </Link>
-              </li>
-            </ul>
             <Suspense>
               <Outlet />
             </Suspense>
