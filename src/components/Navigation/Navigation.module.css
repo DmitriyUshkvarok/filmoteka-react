@@ -23,5 +23,5 @@
 }
 
 .navigationLink:hover {
-    color: gold;
+    color: var(--hover-color-text);
 }

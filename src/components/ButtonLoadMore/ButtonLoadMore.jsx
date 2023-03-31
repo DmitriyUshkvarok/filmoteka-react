@@ -1,17 +1,11 @@
 import PropTypes from 'prop-types';
-import css from './ButtonLoadMore.module.css';
+import { BtnLoadMore } from './ButtonLoadMore.styled';
 
 const ButtonLoadMore = ({ hendleIncrement }) => {
   return (
-    <div>
-      <button
-        className={css.btnLoadMore}
-        type="button"
-        onClick={() => hendleIncrement()}
-      >
-        Load More
-      </button>
-    </div>
+    <BtnLoadMore type="button" onClick={() => hendleIncrement()}>
+      Load More
+    </BtnLoadMore>
   );
 };
 

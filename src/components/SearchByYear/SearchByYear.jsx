@@ -5,9 +5,8 @@ import { toast } from 'react-toastify';
 import MoviesList from 'components/MoviesList/MoviesList';
 import ButtonLoadMore from 'components/ButtonLoadMore/ButtonLoadMore';
 import Select from 'react-select';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faFilm } from '@fortawesome/free-solid-svg-icons';
 import Container from 'components/Container/Container';
+
 function SearchByYears() {
   const [selectedYear, setSelectedYear] = useState(0);
   const [movies, setMovies] = useState([]);
@@ -20,12 +19,19 @@ function SearchByYears() {
     if (selectedYear !== 0) {
       const fetchMovies = async () => {
         setLoading(true);
-        setShowButton(true);
         try {
-          const newYear = await apiTheMovieDB.fetchByYear(page, selectedYear);
-          setMovies(newYear);
-          if (newYear.length === 0) {
-            toast.error("sorry, that's all the movies we could find");
+          const newMovies = await apiTheMovieDB.fetchByYear(page, selectedYear);
+          if (newMovies.length === 0) {
+            setShowButton(false);
+            if (page === 1) {
+              setMovies([]);
+              toast.error("Sorry, we couldn't find any movies for that year.");
+            } else {
+              toast.error("That's all the movies we could find for that year.");
+            }
+          } else {
+            setShowButton(true);
+            setMovies(prevMovies => [...prevMovies, ...newMovies]);
           }
         } catch (error) {
           setError(error);
@@ -77,16 +83,14 @@ function SearchByYears() {
                 placeholder="Select a year"
                 menuPlacement="auto"
               />
-              <div className={css.selectIcon}>
-                <FontAwesomeIcon icon={faFilm} />
-              </div>
+              <div className={css.selectIcon}></div>
             </div>
           </div>
 
           {movies.length > 0 ? (
             <MoviesList movies={movies} />
           ) : loading ? (
-            <p>Loading...</p>
+            <p className={css.loadingMoviesListYear}>Loading...</p>
           ) : (
             <p className={css.searchText}>
               Please select a year to see movies.

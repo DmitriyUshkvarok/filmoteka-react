@@ -11,12 +11,12 @@ import ButtonBack from 'components/ButtonBack/ButtonBack';
 
 function MovieDetalis() {
   const { movieId } = useParams();
-  const location = useLocation();
   const [movie, setMovie] = useState([]);
   const [favorites, setFavorites] = useState([]);
   const [isFavorite, setIsFavorite] = useState(false);
   const [trailerId, setTrailerId] = useState(null);
   const [urlModal, setUrlModal] = useState(false);
+  const location = useLocation();
 
   const backLink = location.state?.from ?? '/';
 

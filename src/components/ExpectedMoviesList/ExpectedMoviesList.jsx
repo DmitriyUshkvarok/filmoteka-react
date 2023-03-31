@@ -60,8 +60,23 @@ const ExpectedMoviesList = () => {
                   prevEl: '.swiper-button-prev',
                 }}
                 scrollbar={{ draggable: true }}
-                spaceBetween={10}
-                slidesPerView={6}
+                breakpoints={{
+                  320: {
+                    slidesPerView: 1,
+                  },
+                  480: {
+                    slidesPerView: 3,
+                    spaceBetween: 10,
+                  },
+                  768: {
+                    slidesPerView: 4,
+                    spaceBetween: 10,
+                  },
+                  1200: {
+                    slidesPerView: 6,
+                    spaceBetween: 10,
+                  },
+                }}
               >
                 {movies.map(
                   ({ poster_path, title, id, vote_average, release_date }) => {

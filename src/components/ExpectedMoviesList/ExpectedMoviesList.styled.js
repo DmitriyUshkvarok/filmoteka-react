@@ -47,11 +47,11 @@ export const ExpectedInfoWrapper = styled.div`
 `;
 
 export const ExpectedInfoContainer = styled.div`
-  //   padding: 5px;
+  padding: 5px;
 `;
 
 export const StyledSwiperSlide = styled(SwiperSlide)`
-  max-width: 215px;
+  width: 100%;
   height: 100%;
   background: #232526;
   background: var(--background-movies-item);
@@ -74,7 +74,7 @@ export const ImgExpectedWrapper = styled.div`
 `;
 
 export const ExpectedImg = styled.img`
-  max-width: 100%;
+  width: 100%;
   object-fit: cover;
   transition: transform 0.4s;
   -webkit-transition: transform 0.4s;

@@ -10,7 +10,7 @@
 }
 
 .movieBarListItem a {
-    color: rgb(162, 158, 158);
+    color: var(--color);
     font-size: 16px;
     text-decoration: underline;
 }

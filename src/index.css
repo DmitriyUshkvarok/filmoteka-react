@@ -15,9 +15,11 @@ body[data-theme='dark'] {
   --background-body: linear-gradient(to right, #E7E9BB, #403B4A);
   --background-header: linear-gradient(to right, #efefbb, #d4d3dd);
   --background-movies-item: linear-gradient(to right, #efefbb, #d4d3dd);
-  --color: gray;
+  --color: rgb(41, 28, 28);
   --border-color: gray;
   --transition: 0.4s;
+  --box-shadow-header: 0px 2px 8px rgba(0, 0, 0, 0.2);
+  --hover-color-text: rgb(42, 155, 155);
 }
 
 body[data-theme='light'] {
@@ -27,6 +29,8 @@ body[data-theme='light'] {
   --color: aqua;
   --border-color: gold;
   --transition: 0.4s;
+  --box-shadow-header: 0px 2px 8px rgba(10, 216, 244, 0.4);
+  --hover-color-text: rgb(115, 87, 87);
 }
 
 code {

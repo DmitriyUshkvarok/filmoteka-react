@@ -12,7 +12,7 @@
     height: 50px;
     margin-right: 10px;
     background-color: transparent;
-    border: 1px solid var(--border-color);
+    border: 1px solid gray;
     outline: none;
     border-radius: 5px;
     -webkit-border-radius: 5px;
@@ -23,20 +23,20 @@
 }
 
 .inputSearch:focus {
-    border: 1px solid gray;
+    border: 1px solid var(--border-color);
 }
 
 .inputSearch::placeholder {
-    color: black;
+    color: var(--color);
     opacity: 0.3;
 }
 
 .serchBtn {
     width: 100px;
     height: 50px;
-    background-color: gold;
+    background: var(--background-header);
     border: var(--border-color);
-    color: gray;
+    color: var(--color);
     border-radius: 5px;
     -webkit-border-radius: 5px;
     -moz-border-radius: 5px;
@@ -47,10 +47,5 @@
 
 .serchBtn:hover,
 .serchBtn:focus {
-    background-color: rgb(246, 105, 5);
-    transition: background-color 0.3s;
-    -webkit-transition: background-color 0.3s;
-    -moz-transition: background-color 0.3s;
-    -ms-transition: background-color 0.3s;
-    -o-transition: background-color 0.3s;
+    background: var(--background-body);
 }
