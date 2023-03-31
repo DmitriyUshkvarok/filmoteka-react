@@ -49,7 +49,6 @@ const ActorsMoviePage = () => {
           <p>Loading...</p>
         ) : (
           <div className={css.actorsMovies}>
-            {}
             <MoviesList movies={movies} />
           </div>
         )}

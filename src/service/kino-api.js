@@ -77,6 +77,12 @@ function fetchExpectedMovies() {
     .then(response => response.data.results);
 }
 
+function fetchFilmsByRating(currentPage = 1) {
+  return axios
+    .get(`${URL}/movie/top_rated?api_key=${key}&page=${currentPage}`)
+    .then(response => response.data);
+}
+
 const apiTheMovieDB = {
   fetchMoviesbyActors,
   fetchTrending,
@@ -90,6 +96,7 @@ const apiTheMovieDB = {
   fetchActors,
   fetchByYear,
   fetchExpectedMovies,
+  fetchFilmsByRating,
 };
 
 export default apiTheMovieDB;

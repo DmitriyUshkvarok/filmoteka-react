@@ -13,6 +13,11 @@ function MoviesBar() {
             Actors
           </Link>
         </li>
+        <li className={css.movieBarListItem}>
+          <Link to={`/movie/top-rated/`} state={{ from: location }}>
+            Top Rated
+          </Link>
+        </li>
       </ul>
       <div>
         <SearchByYears />
