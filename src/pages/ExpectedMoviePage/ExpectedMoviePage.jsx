@@ -1,34 +1,32 @@
 import Container from 'components/Container/Container';
 import MoviesList from 'components/MoviesList/MoviesList';
-import css from '../ActorsPage/ActorsPage.module.css';
+import apiTheMovieDB from 'service/kino-api';
+import ButtonBack from 'components/ButtonBack/ButtonBack';
 import {
-  TitleTopRating,
-  LoadingTopRating,
-  BtnWrapperTop,
-} from './TopRatedPage.styled';
-import { Link, useLocation } from 'react-router-dom';
+  ExpectedTitle,
+  BtnBackExpectedWrapper,
+} from './ExpectedMoviePage.styled';
+import css from '../ActorsPage/ActorsPage.module.css';
 import { toast } from 'react-toastify';
-import apiTheMovieDB from '../../service/kino-api';
 import { useState, useEffect } from 'react';
 import ReactPaginate from 'react-paginate';
-import ButtonBack from 'components/ButtonBack/ButtonBack';
+import { Link, useLocation } from 'react-router-dom';
 
-const TopRatedPage = () => {
-  const [movies, setMovies] = useState([]);
+const ExpectedMoviePage = () => {
+  const [movies, setMovie] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [totalPages, setTotalPages] = useState(0);
   const [currentPage, setCurrentPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(0);
   const location = useLocation();
   const backLink = location.state?.from ?? '/';
 
   useEffect(() => {
     apiTheMovieDB
-      .fetchFilmsByRating(currentPage)
+      .fetchWaitingForTheMovies(currentPage)
       .then(({ results, total_pages }) => {
-        setMovies(results);
+        setMovie(results);
         setTotalPages(Math.min(total_pages, 500));
-
         if (results.length === 0) {
           toast.error("sorry, that's all the actors we could find");
         }
@@ -53,14 +51,14 @@ const TopRatedPage = () => {
   return (
     <>
       <Container>
-        <BtnWrapperTop>
+        <BtnBackExpectedWrapper>
           <Link to={backLink}>
             <ButtonBack />
           </Link>
-        </BtnWrapperTop>
-        <TitleTopRating>Top rating movies</TitleTopRating>
+        </BtnBackExpectedWrapper>
+        <ExpectedTitle>Expected Movies </ExpectedTitle>
         {loading ? (
-          <LoadingTopRating>Loading...</LoadingTopRating>
+          <p>Loading...</p>
         ) : (
           <>
             <MoviesList movies={movies} />
@@ -87,4 +85,4 @@ const TopRatedPage = () => {
   );
 };
 
-export default TopRatedPage;
+export default ExpectedMoviePage;

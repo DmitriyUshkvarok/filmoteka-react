@@ -29,6 +29,10 @@ const TopRatedPage = lazy(() =>
   import('../../pages/TopRatedPage/TopRatedPage')
 );
 
+const ExpectedMoviesPage = lazy(() =>
+  import('../../pages/ExpectedMoviePage/ExpectedMoviePage')
+);
+
 function App() {
   return (
     <>
@@ -44,6 +48,10 @@ function App() {
           <Route path="movie/actors/" element={<ActorsPage />} />
           <Route path="actors/movies/:id" element={<ActorsMoviePage />} />
           <Route path="movie/top-rated/" element={<TopRatedPage />} />
+          <Route
+            path="movie/expected-movies/"
+            element={<ExpectedMoviesPage />}
+          />
           <Route path="/movies/:movieId" element={<MoviesDetalis />}>
             <Route path="cast" element={<CastMovie />} />
             <Route path="review" element={<Reviews />} />

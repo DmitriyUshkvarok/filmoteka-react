@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import apiTheMovieDB from 'service/kino-api';
 import ButtonBack from 'components/ButtonBack/ButtonBack';
-import css from './ActorsMoviesPage.module.css';
+import { BtnBackWrapper, ActorsMoviesTitle } from './ActorsMoviesPage.styled';
 import { toast } from 'react-toastify';
 import Container from 'components/Container/Container';
 import MoviesList from 'components/MoviesList/MoviesList';
@@ -40,17 +40,18 @@ const ActorsMoviePage = () => {
   return (
     <>
       <Container>
-        <div className={css.btnBackWrapper}>
+        <BtnBackWrapper>
           <Link to={'/movie/actors/'}>
             <ButtonBack />
           </Link>
-        </div>
+        </BtnBackWrapper>
+        <ActorsMoviesTitle>Actors info and movies</ActorsMoviesTitle>
         {loading ? (
           <p>Loading...</p>
         ) : (
-          <div className={css.actorsMovies}>
+          <>
             <MoviesList movies={movies} />
-          </div>
+          </>
         )}
       </Container>
       ;

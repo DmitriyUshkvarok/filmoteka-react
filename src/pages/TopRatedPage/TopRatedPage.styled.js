@@ -1,9 +1,9 @@
 import styled from 'styled-components';
 
-export const TitleTopRating = styled.h1`
+export const TitleTopRating = styled.h2`
   display: flex;
   justify-content: center;
-  margin-top: 150px;
+  margin-top: 30px;
   color: var(--color);
   text-transform: uppercase;
   margin-bottom: 20px;
@@ -16,4 +16,8 @@ export const LoadingTopRating = styled.p`
   margin-right: auto;
   color: var(--color);
   font-size: 21px;
+`;
+
+export const BtnWrapperTop = styled.p`
+  margin-top: 150px;
 `;

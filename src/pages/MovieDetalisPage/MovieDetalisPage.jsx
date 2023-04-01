@@ -2,7 +2,13 @@ import { GiReturnArrow } from 'react-icons/gi';
 import css from './MovieDetalis.module.css';
 import { toast } from 'react-toastify';
 import Container from 'components/Container/Container';
-import { useParams, useLocation, Link, Outlet } from 'react-router-dom';
+import {
+  useParams,
+  useLocation,
+  Link,
+  Outlet,
+  useNavigate,
+} from 'react-router-dom';
 import { useState, useEffect, Suspense } from 'react';
 import apiTheMovieDB from 'service/kino-api';
 import posterimg from '../../images/poster.jpeg';
@@ -19,6 +25,12 @@ function MovieDetalis() {
   const location = useLocation();
 
   const backLink = location.state?.from ?? '/';
+
+  const navigate = useNavigate();
+  // eslint-disable-next-line no-unused-vars
+  const handleGoBack = () => {
+    navigate('/movie/actors/');
+  };
 
   function handleFetchTrailer() {
     apiTheMovieDB.fetchTrailerMovies(movieId).then(videos => {
@@ -157,15 +169,17 @@ function MovieDetalis() {
                     </Link>
                   </li>
                   <li className={css.reviewiLstItem}>
-                    <button
-                      type="button"
-                      className={css.addMoviesBtn}
-                      onClick={toggleFavorites}
-                    >
-                      {isFavorite
-                        ? 'Remove from library'
-                        : 'Add movie to library'}
-                    </button>
+                    <Link to={'/library'} onClick={toggleFavorites}>
+                      <button
+                        type="button"
+                        className={css.addMoviesBtn}
+                        // onClick={toggleFavorites}
+                      >
+                        {isFavorite
+                          ? 'Remove from library'
+                          : 'Add movie to library'}
+                      </button>
+                    </Link>
                   </li>
                 </ul>
               </div>

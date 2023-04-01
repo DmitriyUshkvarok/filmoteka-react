@@ -63,6 +63,25 @@ function fetchMoviesbyActors(id, page = 1) {
     .then(response => response.data.cast);
 }
 
+// function fetchActorInfoAndMovies(id, page = 1) {
+//   const actorInfo = axios
+//     .get(`${URL}person/${id}?api_key=${key}&language=ru-RU`)
+//     .then(response => response.data);
+//   const actorMovies = axios
+//     .get(
+//       `${URL}person/${id}/movie_credits?api_key=${key}&language=ru-RU&page=${page}`
+//     )
+//     .then(response => response.data.cast);
+
+//   return Promise.all([actorInfo, actorMovies]).then(results => {
+//     const [info, movies] = results;
+//     return {
+//       actorInfo: info,
+//       actorMovies: movies,
+//     };
+//   });
+// }
+
 function fetchByYear(page = 1, selectedYear) {
   return axios
     .get(
@@ -83,8 +102,19 @@ function fetchFilmsByRating(currentPage = 1) {
     .then(response => response.data);
 }
 
+function fetchWaitingForTheMovies(currentPage = 1) {
+  return axios
+    .get(
+      `${URL}/movie/upcoming?api_key=${key}&primary_release_date.gte=${new Date()
+        .toISOString()
+        .slice(0, 10)}&page=${currentPage}`
+    )
+    .then(response => response.data);
+}
+
 const apiTheMovieDB = {
   fetchMoviesbyActors,
+  // fetchActorInfoAndMovies,
   fetchTrending,
   fetchSearchMovie,
   fetchMovieDetalis,
@@ -97,6 +127,7 @@ const apiTheMovieDB = {
   fetchByYear,
   fetchExpectedMovies,
   fetchFilmsByRating,
+  fetchWaitingForTheMovies,
 };
 
 export default apiTheMovieDB;
