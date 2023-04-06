@@ -3,12 +3,27 @@ import { toast } from 'react-toastify';
 import { useState, useEffect } from 'react';
 import apiTheMovieDB from 'service/kino-api';
 import { useParams } from 'react-router-dom';
+import {
+  InfoActorContainer,
+  ActorInfoMain,
+  ActorsDetalis,
+  ActorsInfoName,
+  Biography,
+  ActorInfoImg,
+  ActorsInfoBirth,
+  ActorsInfoDepartment,
+  ActorsPlaceOfBirth,
+  ActorsPopularity,
+  BtnReadMore,
+} from './ActorsInfo.styled';
 
 const ActorsInfo = () => {
   const { id } = useParams();
   const [actorsInfo, setActorsInfo] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [showFullBio, setShowFullBio] = useState(false);
+  const MAX_BIO_LENGTH = 300;
 
   useEffect(() => {
     apiTheMovieDB
@@ -29,6 +44,10 @@ const ActorsInfo = () => {
     return <p>{error.message}</p>;
   }
 
+  const toggleFullBio = () => {
+    setShowFullBio(!showFullBio);
+  };
+
   return (
     <Container>
       {loading ? (
@@ -36,27 +55,45 @@ const ActorsInfo = () => {
       ) : (
         <div>
           {actorsInfo && (
-            <div key={actorsInfo.id}>
-              <h3>{actorsInfo.name}</h3>
-              <div className="actorInfoMain">
-                <img
+            <InfoActorContainer key={actorsInfo.id}>
+              <ActorInfoMain>
+                <ActorInfoImg
                   src={
                     actorsInfo.profile_path
                       ? `https://image.tmdb.org/t/p/w500/${actorsInfo.profile_path}`
                       : 'https://via.placeholder.com/200x300'
                   }
                   alt={actorsInfo.name}
-                  width={200}
+                  width={300}
                 />
-                <p className="biography">{actorsInfo.biography}</p>
-              </div>
-              <div className="actorsDetalis">
-                <p>{actorsInfo.birthday}</p>
-                <p>{actorsInfo.known_for_department}</p>
-                <p>{actorsInfo.place_of_birth}</p>
-                <div>{actorsInfo.popularity}</div>
-              </div>
-            </div>
+                <ActorsInfoBirth>
+                  <span> Date of birth:</span>
+                  {actorsInfo.birthday}
+                </ActorsInfoBirth>
+                <ActorsInfoDepartment>
+                  {actorsInfo.known_for_department}
+                </ActorsInfoDepartment>
+                <ActorsPlaceOfBirth>
+                  <span>Place of birth:</span>
+                  {actorsInfo.place_of_birth}
+                </ActorsPlaceOfBirth>
+                <ActorsPopularity>
+                  <span>Popularity:</span>
+                  {actorsInfo.popularity.toFixed(1)}
+                </ActorsPopularity>
+              </ActorInfoMain>
+              <ActorsDetalis>
+                <ActorsInfoName>{actorsInfo.name}</ActorsInfoName>
+                <Biography>
+                  {showFullBio
+                    ? actorsInfo.biography
+                    : `${actorsInfo.biography.slice(0, MAX_BIO_LENGTH)}...`}
+                  <BtnReadMore onClick={toggleFullBio}>
+                    {showFullBio ? 'Hide' : 'Read more'}
+                  </BtnReadMore>
+                </Biography>
+              </ActorsDetalis>
+            </InfoActorContainer>
           )}
         </div>
       )}
