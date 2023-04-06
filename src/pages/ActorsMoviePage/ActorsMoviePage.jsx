@@ -1,11 +1,21 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, Suspense } from 'react';
 import apiTheMovieDB from 'service/kino-api';
 import ButtonBack from 'components/ButtonBack/ButtonBack';
-import { BtnBackWrapper, ActorsMoviesTitle } from './ActorsMoviesPage.styled';
+import {
+  BtnBackWrapper,
+  ActorsMoviesTitle,
+  ActorsMoreInfo,
+} from './ActorsMoviesPage.styled';
 import { toast } from 'react-toastify';
 import Container from 'components/Container/Container';
 import MoviesList from 'components/MoviesList/MoviesList';
-import { Link, useNavigate, useParams } from 'react-router-dom';
+import {
+  Link,
+  useNavigate,
+  useParams,
+  useLocation,
+  Outlet,
+} from 'react-router-dom';
 
 const ActorsMoviePage = () => {
   const { id } = useParams();
@@ -13,6 +23,7 @@ const ActorsMoviePage = () => {
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
 
+  const location = useLocation();
   const navigate = useNavigate();
   // eslint-disable-next-line no-unused-vars
   const handleGoBack = () => {
@@ -37,6 +48,7 @@ const ActorsMoviePage = () => {
   if (error) {
     return <p>{error.message}</p>;
   }
+
   return (
     <>
       <Container>
@@ -46,6 +58,14 @@ const ActorsMoviePage = () => {
           </Link>
         </BtnBackWrapper>
         <ActorsMoviesTitle>Actors info and movies</ActorsMoviesTitle>
+        <Link to={`/actors/movies/${id}/actors-info`} state={location.state}>
+          <ActorsMoreInfo>
+            See more information about the actor...
+          </ActorsMoreInfo>
+        </Link>
+        <Suspense>
+          <Outlet />
+        </Suspense>
         {loading ? (
           <p>Loading...</p>
         ) : (

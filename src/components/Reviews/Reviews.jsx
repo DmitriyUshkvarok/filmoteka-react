@@ -1,7 +1,7 @@
 import { useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import apiTheMovieDB from 'service/kino-api';
-import css from './Reviews.module.css';
+import { Author, Content } from './Reviews.styled';
 import Container from 'components/Container/Container';
 
 function Review() {
@@ -11,7 +11,6 @@ function Review() {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    setIsLoading(true);
     apiTheMovieDB
       .fetchMovieReview(movieId)
       .then(data => {
@@ -35,13 +34,13 @@ function Review() {
   return (
     <>
       <Container>
-        <div className={css.reviewList}>
+        <div className="css.reviewList">
           {reviews && reviews.length > 0 ? (
             reviews.map(({ author, content, id }) => (
-              <div className={css.reviewListItem} key={id}>
-                <p className={css.author}>Author: {author}</p>
+              <div className="css.reviewListItem" key={id}>
+                <Author>Author: {author}</Author>
 
-                <p className={css.content}>Content:{content}</p>
+                <Content>Content:{content}</Content>
               </div>
             ))
           ) : (

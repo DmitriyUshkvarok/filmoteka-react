@@ -1,7 +1,8 @@
 import { useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import apiTheMovieDB from 'service/kino-api';
-import css from './Cast.module.css';
+import { Link } from 'react-router-dom';
+import { CastList, CastItem, CastName } from './Cast.styled';
 
 function CastMovie() {
   const { movieId } = useParams();
@@ -33,26 +34,28 @@ function CastMovie() {
 
   return (
     <>
-      <ul className={css.castList}>
+      <CastList>
         {cast && cast.length > 0 ? (
           cast.map(({ profile_path, name, id }) => (
-            <li className={css.castItem} key={id}>
-              <img
-                src={
-                  profile_path
-                    ? `https://image.tmdb.org/t/p/w500/${profile_path}`
-                    : 'https://via.placeholder.com/200x300'
-                }
-                alt={name}
-                width={200}
-              />
-              <p className={css.castName}>{name}</p>
-            </li>
+            <Link to={`/actors/movies/${id}/actors-info`} key={id}>
+              <CastItem key={id}>
+                <img
+                  src={
+                    profile_path
+                      ? `https://image.tmdb.org/t/p/w500/${profile_path}`
+                      : 'https://via.placeholder.com/200x300'
+                  }
+                  alt={name}
+                  width={200}
+                />
+                <CastName>{name}</CastName>
+              </CastItem>
+            </Link>
           ))
         ) : (
           <p>No cast members found</p>
         )}
-      </ul>
+      </CastList>
     </>
   );
 }

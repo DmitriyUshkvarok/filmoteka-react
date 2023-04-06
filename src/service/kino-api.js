@@ -63,24 +63,11 @@ function fetchMoviesbyActors(id, page = 1) {
     .then(response => response.data.cast);
 }
 
-// function fetchActorInfoAndMovies(id, page = 1) {
-//   const actorInfo = axios
-//     .get(`${URL}person/${id}?api_key=${key}&language=ru-RU`)
-//     .then(response => response.data);
-//   const actorMovies = axios
-//     .get(
-//       `${URL}person/${id}/movie_credits?api_key=${key}&language=ru-RU&page=${page}`
-//     )
-//     .then(response => response.data.cast);
-
-//   return Promise.all([actorInfo, actorMovies]).then(results => {
-//     const [info, movies] = results;
-//     return {
-//       actorInfo: info,
-//       actorMovies: movies,
-//     };
-//   });
-// }
+function fetchActorInfoAndMovies(id) {
+  return axios
+    .get(`${URL}person/${id}?api_key=${key}`)
+    .then(response => response.data);
+}
 
 function fetchByYear(page = 1, selectedYear) {
   return axios
@@ -114,7 +101,7 @@ function fetchWaitingForTheMovies(currentPage = 1) {
 
 const apiTheMovieDB = {
   fetchMoviesbyActors,
-  // fetchActorInfoAndMovies,
+  fetchActorInfoAndMovies,
   fetchTrending,
   fetchSearchMovie,
   fetchMovieDetalis,

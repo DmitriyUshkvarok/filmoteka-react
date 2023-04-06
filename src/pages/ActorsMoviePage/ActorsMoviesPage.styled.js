@@ -13,3 +13,15 @@ export const ActorsMoviesTitle = styled.h2`
   display: flex;
   justify-content: center;
 `;
+
+export const ActorsMoreInfo = styled.h3`
+  margin-bottom: 30px;
+  text-transform: uppercase;
+  color: var(--color);
+  transition: color var(--transition);
+  cursor: pointer;
+
+  &:hover {
+    text-decoration: underline;
+  }
+`;

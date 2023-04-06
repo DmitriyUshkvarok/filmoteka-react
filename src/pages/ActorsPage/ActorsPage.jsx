@@ -1,4 +1,13 @@
 import { useState, useEffect } from 'react';
+import {
+  Search,
+  ActorList,
+  ActorListItem,
+  ActorsName,
+  ActorsDepartment,
+  ActorsRating,
+  StyleDebounceInput,
+} from './ActorsPage.Styled';
 import css from './ActorsPage.module.css';
 import Container from 'components/Container/Container';
 import apiTheMovieDB from 'service/kino-api';
@@ -6,7 +15,6 @@ import { toast } from 'react-toastify';
 import ReactPaginate from 'react-paginate';
 import { useLocation, Link } from 'react-router-dom';
 import ButtonBack from 'components/ButtonBack/ButtonBack';
-import DebounceInput from 'react-debounce-input';
 
 function ActorsPage() {
   const [actors, setActors] = useState([]);
@@ -62,9 +70,8 @@ function ActorsPage() {
 
   return (
     <Container>
-      <div className={css.search}>
-        <DebounceInput
-          className={css.inputActors}
+      <Search>
+        <StyleDebounceInput
           type="text"
           placeholder="Search actors"
           value={searchQuery}
@@ -72,7 +79,7 @@ function ActorsPage() {
           debounceTimeout={500}
           onChange={handleSearchChange}
         />
-      </div>
+      </Search>
       <Link to={backLink}>
         <ButtonBack />
       </Link>
@@ -80,14 +87,14 @@ function ActorsPage() {
         <p>Loading...</p>
       ) : (
         <>
-          <ul className={css.actorList}>
+          <ActorList>
             {filteredActors.map(
               (
                 { profile_path, name, known_for_department, popularity, id },
                 index
               ) => (
                 <Link to={`/actors/movies/${id}`} key={id}>
-                  <li className={css.actorListItem} key={`${id}-${index}`}>
+                  <ActorListItem key={`${id}-${index}`}>
                     <img
                       src={
                         profile_path
@@ -97,18 +104,14 @@ function ActorsPage() {
                       alt={name}
                       width={200}
                     />
-                    <p className={css.actorsName}>{name}</p>
-                    <p className={css.actorsDepartment}>
-                      {known_for_department}
-                    </p>
-                    <p className={css.actorsRating}>
-                      {(popularity * 0.5).toFixed(0)}%
-                    </p>
-                  </li>
+                    <ActorsName>{name}</ActorsName>
+                    <ActorsDepartment>{known_for_department}</ActorsDepartment>
+                    <ActorsRating>{(popularity / 5).toFixed(0)}%</ActorsRating>
+                  </ActorListItem>
                 </Link>
               )
             )}
-          </ul>
+          </ActorList>
           <ReactPaginate
             pageCount={totalPages}
             pageRangeDisplayed={2}

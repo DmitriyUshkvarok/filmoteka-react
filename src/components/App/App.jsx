@@ -21,6 +21,9 @@ const RegistrationPage = lazy(() =>
 const ActorsMoviePage = lazy(() =>
   import('../../pages/ActorsMoviePage/ActorsMoviePage')
 );
+
+const ActorsInfo = lazy(() => import('../ActorsInfo/ActorsInfo'));
+
 const LibraryPage = lazy(() =>
   import('../../pages/LibraryPage/LibraryPage.jsx')
 );
@@ -46,7 +49,9 @@ function App() {
           <Route path="registration" element={<RegistrationPage />} />
           <Route path="library" element={<LibraryPage />} />
           <Route path="movie/actors/" element={<ActorsPage />} />
-          <Route path="actors/movies/:id" element={<ActorsMoviePage />} />
+          <Route path="/actors/movies/:id" element={<ActorsMoviePage />}>
+            <Route path="actors-info" element={<ActorsInfo />} />
+          </Route>
           <Route path="movie/top-rated/" element={<TopRatedPage />} />
           <Route
             path="movie/expected-movies/"

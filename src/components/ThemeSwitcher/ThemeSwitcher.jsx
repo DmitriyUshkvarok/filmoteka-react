@@ -15,7 +15,6 @@ const ThemeSwitcher = () => {
 
   const handleThemeToggle = () => {
     dispatch(toggleTheme());
-    console.log('rere');
   };
   return (
     <button className={css.btnSwitcher} onClick={handleThemeToggle}>
