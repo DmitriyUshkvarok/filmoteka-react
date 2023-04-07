@@ -2,11 +2,14 @@ import styled from 'styled-components';
 
 export const InfoActorContainer = styled.div`
   display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
   padding: 20px;
   margin-bottom: 20px;
 `;
 
 export const ActorInfoMain = styled.div`
+  max-width: 50%;
   padding: 10px;
   border: 1px solid var(--border-color);
   border-radius: 5px;
@@ -14,11 +17,13 @@ export const ActorInfoMain = styled.div`
 `;
 
 export const ActorInfoImg = styled.img`
+  max-width: 100%;
   border-radius: 5px;
   margin-bottom: 10px;
 `;
 
 export const ActorsDetalis = styled.div`
+  max-width: 50%;
   padding: 10px;
   /* border: 1px solid var(--border-color); */
   border-radius: 5px;
@@ -77,6 +82,7 @@ export const Biography = styled.p`
   color: var(--color);
   font-size: 21px;
   line-height: 25px;
+  text-align: justify;
 `;
 
 export const BtnReadMore = styled.button`

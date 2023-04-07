@@ -10,4 +10,5 @@ export const Content = styled.p`
   font-size: 20px;
   color: var(--color);
   margin-bottom: 30px;
+  text-align: justify;
 `;

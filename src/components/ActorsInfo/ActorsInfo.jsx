@@ -64,7 +64,7 @@ const ActorsInfo = () => {
                       : 'https://via.placeholder.com/200x300'
                   }
                   alt={actorsInfo.name}
-                  width={300}
+                  width={470}
                 />
                 <ActorsInfoBirth>
                   <span> Date of birth:</span>

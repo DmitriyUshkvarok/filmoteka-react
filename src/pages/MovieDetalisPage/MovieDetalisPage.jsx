@@ -14,6 +14,22 @@ import apiTheMovieDB from 'service/kino-api';
 import posterimg from '../../images/poster.jpeg';
 import YouTube from 'react-youtube';
 import ButtonBack from 'components/ButtonBack/ButtonBack';
+import {
+  DetailsWrapper,
+  ColumnInfo,
+  PosterMovie,
+  BtnBackDetailsWrapper,
+  InfoTitle,
+  ScoreDetails,
+  OverviewTitle,
+  Overview,
+  GenreListDetails,
+  ColumnImg,
+  DetalisImg,
+  ReviewList,
+  VideoBackdrop,
+  AddMoviesBtn,
+} from './MoviesDetalisPage.styled';
 
 function MovieDetalis() {
   const [movie, setMovie] = useState([]);
@@ -120,14 +136,13 @@ function MovieDetalis() {
       {movie && (
         <section className={css.detalis}>
           <Container>
-            <div className={css.btnBackDetalisWrapper}>
+            <BtnBackDetailsWrapper>
               <Link to={backLink}>
                 <ButtonBack />
               </Link>
-            </div>
-            <div className={css.detalisWrapper}>
-              <img
-                className={css.posterMovie}
+            </BtnBackDetailsWrapper>
+            <DetailsWrapper>
+              <PosterMovie
                 src={
                   movie.backdrop_path
                     ? `https://image.tmdb.org/t/p/w500/${movie.backdrop_path}`
@@ -135,24 +150,24 @@ function MovieDetalis() {
                 }
                 alt={movie.title}
               />
-              <div className={css.columnInfo}>
-                <h2 className={css.infoTitle}>
+              <ColumnInfo>
+                <InfoTitle>
                   {movie.title ? movie.title : 'Movie without a title'}
-                </h2>
-                <p className={css.scoreDetalis}>
+                </InfoTitle>
+                <ScoreDetails>
                   User score: {(movie.vote_average * 10).toFixed(0)}%
-                </p>
-                <h3 className={css.overviewTitle}>Overview</h3>
-                <p className={css.overview}>
+                </ScoreDetails>
+                <OverviewTitle>Overview</OverviewTitle>
+                <Overview>
                   {movie.overview ? movie.overview : 'Movie without a overview'}
-                </p>
-                <ul className={css.ganreListDetails}>
+                </Overview>
+                <GenreListDetails>
                   {movie.genres &&
                     movie.genres.map(({ name, id }) => (
                       <li key={id}>{name}</li>
                     ))}
-                </ul>
-                <ul className={css.reviewList}>
+                </GenreListDetails>
+                <ReviewList>
                   <li className={css.reviewiLstItem}>
                     <Link to="cast" state={location.state} className={css.cast}>
                       Cast
@@ -170,21 +185,17 @@ function MovieDetalis() {
                   </li>
                   <li className={css.reviewiLstItem}>
                     <Link to={'/library'} onClick={toggleFavorites}>
-                      <button
-                        type="button"
-                        className={css.addMoviesBtn}
-                        // onClick={toggleFavorites}
-                      >
+                      <AddMoviesBtn type="button">
                         {isFavorite
                           ? 'Remove from library'
                           : 'Add movie to library'}
-                      </button>
+                      </AddMoviesBtn>
                     </Link>
                   </li>
-                </ul>
-              </div>
-              <div className={css.columnImg}>
-                <img
+                </ReviewList>
+              </ColumnInfo>
+              <ColumnImg>
+                <DetalisImg
                   src={
                     movie.poster_path
                       ? `https://image.tmdb.org/t/p/w500/${movie.poster_path}`
@@ -192,12 +203,11 @@ function MovieDetalis() {
                   }
                   alt={movie.title ? movie.title : 'Movie without a title'}
                   width={300}
-                  className={css.detalisImg}
                   style={{ cursor: 'pointer' }}
                   onClick={handleFetchTrailer}
                 />
                 {urlModal && (
-                  <div className={css.videoBackdrop} onClick={clickBackdrop}>
+                  <VideoBackdrop onClick={clickBackdrop}>
                     <GiReturnArrow
                       className={css.iconBackModal}
                       onClick={closeModal}
@@ -222,10 +232,10 @@ function MovieDetalis() {
                         origin: 'http://localhost:3000',
                       }}
                     />
-                  </div>
+                  </VideoBackdrop>
                 )}
-              </div>
-            </div>
+              </ColumnImg>
+            </DetailsWrapper>
 
             <Suspense>
               <Outlet />

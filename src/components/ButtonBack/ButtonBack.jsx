@@ -1,11 +1,9 @@
-import css from './ButtonBack.module.css';
+import { BtnBack } from './ButtonBack.styled';
 
 const ButtonBack = () => {
   return (
     <>
-      <button className={css.btnBack} type="button">
-        &#8592; Go Back
-      </button>
+      <BtnBack type="button">&#8592; Go Back</BtnBack>
     </>
   );
 };
