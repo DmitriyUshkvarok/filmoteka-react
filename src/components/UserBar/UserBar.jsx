@@ -12,7 +12,7 @@ const UserBar = () => {
     <Wrapper>
       <WelcomeMessage>Welcome, {name}!</WelcomeMessage>
       <Email>{email}</Email>
-      <LogoutButton onClick={() => dispatch(authOperation.logOut)}>
+      <LogoutButton onClick={() => dispatch(authOperation.logOut())}>
         Logout
       </LogoutButton>
     </Wrapper>

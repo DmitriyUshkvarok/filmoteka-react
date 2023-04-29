@@ -1,4 +1,7 @@
-import { lazy, Suspense } from 'react';
+import { lazy, Suspense, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import authSelector from 'redux/auth/auth-selector';
+import authOperation from 'redux/auth/auth-operation';
 import { Route, Routes } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -39,7 +42,15 @@ const ExpectedMoviesPage = lazy(() =>
 );
 
 function App() {
-  return (
+  const dispatch = useDispatch();
+  const isRefreshing = useSelector(authSelector.getIsRefreshing);
+
+  useEffect(() => {
+    dispatch(authOperation.refreshCurrentUser());
+  }, [dispatch]);
+  return isRefreshing ? (
+    <b>Loading...</b>
+  ) : (
     <>
       <ToastContainer />
       <Header />

@@ -28,6 +28,11 @@
     width: 100%;
 }
 
+.passwordWrapper {
+    position: relative;
+}
+
+
 .inputName,
 .inputEmail,
 .inputPassword {
@@ -49,6 +54,17 @@
 .inputEmail::placeholder,
 .inputPassword::placeholder {
     opacity: 0.4;
+}
+
+.toggleShowPasword {
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    transform: translate(-50%, -10px);
+    -webkit-transform: translate(-50%, -10px);
+    -moz-transform: translate(-50%, -10px);
+    -ms-transform: translate(-50%, -10px);
+    -o-transform: translate(-50%, -10px);
 }
 
 .btnwrapper {

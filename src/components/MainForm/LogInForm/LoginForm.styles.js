@@ -33,6 +33,21 @@ export const FeedbackFormGroup = styled.div`
   width: 100%;
 `;
 
+export const PasswordWrapper = styled.div`
+  position: relative;
+`;
+
+export const ToggleShowPasword = styled.span`
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translate(-50%, -10px);
+  -webkit-transform: translate(-50%, -10px);
+  -moz-transform: translate(-50%, -10px);
+  -ms-transform: translate(-50%, -10px);
+  -o-transform: translate(-50%, -10px);
+`;
+
 export const InputEmail = styled(Field)`
   box-sizing: border-box;
   width: 100%;

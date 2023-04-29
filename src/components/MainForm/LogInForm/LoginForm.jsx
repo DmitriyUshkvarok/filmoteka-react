@@ -7,11 +7,15 @@ import {
   InputPassword,
   Btnwrapper,
   BtnLogIn,
+  PasswordWrapper,
+  ToggleShowPasword,
 } from './LoginForm.styles.js';
 import { ErrorMessage } from 'formik';
 import * as yup from 'yup';
 import { useDispatch } from 'react-redux';
 import authOperation from 'redux/auth/auth-operation';
+import { BsEye, BsEyeSlash } from 'react-icons/bs';
+import { useState } from 'react';
 
 const initialValues = {
   email: '',
@@ -25,10 +29,15 @@ const schema = yup.object().shape({
 
 function LogInForm() {
   const dispatch = useDispatch();
+  const [showPassword, setShowPassword] = useState(false);
 
   const handleSubmit = (values, { resetForm }) => {
     dispatch(authOperation.logIn(values));
     resetForm();
+  };
+
+  const togglePasswordVisibility = () => {
+    setShowPassword(prevShowPassword => !prevShowPassword);
   };
 
   return (
@@ -44,11 +53,20 @@ function LogInForm() {
           <ErrorMessage name="email" />
         </FeedbackFormGroup>
         <FeedbackFormGroup>
-          <InputPassword
-            type="password"
-            name="password"
-            placeholder="password"
-          />
+          <PasswordWrapper>
+            <InputPassword
+              type={showPassword ? 'text' : 'password'}
+              name="password"
+              placeholder="password"
+            />
+            <ToggleShowPasword onClick={togglePasswordVisibility}>
+              {showPassword ? (
+                <BsEyeSlash color="var(--border-color)" />
+              ) : (
+                <BsEye color="var(--border-color)" />
+              )}
+            </ToggleShowPasword>
+          </PasswordWrapper>
           <ErrorMessage name="password" />
         </FeedbackFormGroup>
         <Btnwrapper>

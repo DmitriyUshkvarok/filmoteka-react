@@ -3,6 +3,8 @@ import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as yup from 'yup';
 import { useDispatch } from 'react-redux';
 import authOperation from 'redux/auth/auth-operation';
+import { BsEye, BsEyeSlash } from 'react-icons/bs';
+import { useState } from 'react';
 
 const initialValues = {
   name: '',
@@ -11,13 +13,18 @@ const initialValues = {
 };
 
 const schema = yup.object().shape({
-  name: yup.string().min(7).max(20).required(),
+  name: yup.string().min(4).max(20).required(),
   email: yup.string().required(),
   password: yup.string().min(10).max(20).required(),
 });
 
 function RegistrationForm() {
   const dispatch = useDispatch();
+  const [showPassword, setShowPassword] = useState(false);
+
+  const togglePasswordVisibility = () => {
+    setShowPassword(prevShowPassword => !prevShowPassword);
+  };
 
   const handleSubmit = (values, { resetForm }) => {
     dispatch(authOperation.register(values));
@@ -51,13 +58,25 @@ function RegistrationForm() {
           <ErrorMessage name="email" />
         </div>
         <div className={css.feedbackFormGroup}>
-          <Field
-            className={css.inputPassword}
-            type="password"
-            name="password"
-            placeholder="password"
-          />
-          <ErrorMessage name="password" />
+          <div className={css.passwordWrapper}>
+            <Field
+              className={css.inputPassword}
+              type={showPassword ? 'text' : 'password'}
+              name="password"
+              placeholder="password"
+            />
+            <span
+              className={css.toggleShowPasword}
+              onClick={togglePasswordVisibility}
+            >
+              {showPassword ? (
+                <BsEyeSlash color="var(--border-color)" />
+              ) : (
+                <BsEye color="var(--border-color)" />
+              )}
+            </span>
+          </div>
+          <ErrorMessage className={css.errorInput} name="password" />
         </div>
         <div className={css.btnwrapper}>
           <button className={css.btnRegister} type="submit">
