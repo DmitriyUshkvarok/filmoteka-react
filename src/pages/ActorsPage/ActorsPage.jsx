@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import {
+  CardsLoader,
   Search,
   ActorList,
   ActorListItem,
@@ -84,7 +85,7 @@ function ActorsPage() {
         <ButtonBack />
       </Link>
       {loading ? (
-        <p>Loading...</p>
+        <CardsLoader size={50} />
       ) : (
         <>
           <ActorList>

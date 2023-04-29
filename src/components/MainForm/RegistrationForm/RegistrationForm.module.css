@@ -73,8 +73,7 @@
     gap: 10px;
 }
 
-.btnRegister,
-.btnLogIn {
+.btnRegister {
     box-sizing: border-box;
     display: flex;
     justify-content: center;
@@ -90,28 +89,21 @@
     -ms-border-radius: 5px;
     -o-border-radius: 5px;
     cursor: pointer;
+    transition: var(--transition);
 }
 
-.backdrop {
-    position: fixed;
-    top: 0;
-    left: 0;
-    z-index: 10;
-    width: 100vw;
-    height: 100vh;
-    background-color: rgba(0, 0, 0, 0.5);
+.btnRegister:hover {
+    background-image: var(--background-header);
+    color: var(--color);
 }
 
-.modal {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    z-index: 15;
-    height: 500px;
-    width: 100%;
-    transform: translate(-50%, -50%);
-    background-color: rgba(255, 255, 255, 0.57);
-    border-radius: 3px;
-    box-shadow: 0 0 5px 5px rgba(201, 162, 45, 0.7),
-        inset 0 0 30px 10px rgba(201, 162, 45, 0.7);
+.formPageDescription {
+    max-width: 800px;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 30px;
+    color: var(--color);
+    font-size: 18px;
+    line-height: 24px;
 }

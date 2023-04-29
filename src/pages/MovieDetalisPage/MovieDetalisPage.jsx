@@ -14,6 +14,7 @@ import apiTheMovieDB from 'service/kino-api';
 import posterimg from '../../images/poster.jpeg';
 import YouTube from 'react-youtube';
 import ButtonBack from 'components/ButtonBack/ButtonBack';
+import authSelector from 'redux/auth/auth-selector';
 import {
   DetailsWrapper,
   ColumnInfo,
@@ -29,7 +30,9 @@ import {
   ReviewList,
   VideoBackdrop,
   AddMoviesBtn,
+  AuthBtnText,
 } from './MoviesDetalisPage.styled';
+import { useSelector } from 'react-redux';
 
 function MovieDetalis() {
   const [movie, setMovie] = useState([]);
@@ -43,6 +46,9 @@ function MovieDetalis() {
   const backLink = location.state?.from ?? '/';
 
   const navigate = useNavigate();
+
+  const isLoggedIn = useSelector(authSelector.getIsLoggedIn);
+
   // eslint-disable-next-line no-unused-vars
   const handleGoBack = () => {
     navigate('/movie/actors/');
@@ -185,12 +191,18 @@ function MovieDetalis() {
                   </li>
                   <li className={css.reviewiLstItem}>
                     <Link to={'/library'} onClick={toggleFavorites}>
-                      <AddMoviesBtn type="button">
+                      <AddMoviesBtn disabled={!isLoggedIn} type="button">
                         {isFavorite
                           ? 'Remove from library'
                           : 'Add movie to library'}
                       </AddMoviesBtn>
                     </Link>
+                    {!isLoggedIn && (
+                      <AuthBtnText>
+                        Register or log in to be able to add a movie to your
+                        library
+                      </AuthBtnText>
+                    )}
                   </li>
                 </ReviewList>
               </ColumnInfo>

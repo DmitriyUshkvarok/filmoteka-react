@@ -245,4 +245,15 @@ export const AddMoviesBtn = styled.button`
   -moz-border-radius: 5px;
   -ms-border-radius: 5px;
   -o-border-radius: 5px;
+
+  &:disabled {
+    background: gray;
+    opacity: 0.4;
+  }
+`;
+
+export const AuthBtnText = styled.p`
+  font-size: 10px;
+  color: var(--color);
+  margin-top: 5px;
 `;

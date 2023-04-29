@@ -108,4 +108,21 @@ export const BtnLogIn = styled.button`
   -ms-border-radius: 5px;
   -o-border-radius: 5px;
   cursor: pointer;
+  transition: var(--transition);
+
+  &:hover {
+    background-image: var(--background-header);
+    color: var(--color);
+  }
+`;
+
+export const FormPageDescription = styled.p`
+  max-width: 800px;
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 30px;
+  color: var(--color);
+  font-size: 18px;
+  line-height: 24px;
 `;

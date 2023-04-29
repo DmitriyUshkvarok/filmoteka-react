@@ -9,6 +9,7 @@ import {
   BtnLogIn,
   PasswordWrapper,
   ToggleShowPasword,
+  FormPageDescription,
 } from './LoginForm.styles.js';
 import { ErrorMessage } from 'formik';
 import * as yup from 'yup';
@@ -41,39 +42,48 @@ function LogInForm() {
   };
 
   return (
-    <FormikStyle
-      initialValues={initialValues}
-      validationSchema={schema}
-      onSubmit={handleSubmit}
-    >
-      <FormLogin>
-        <FormLoginTitle>Login Form</FormLoginTitle>
-        <FeedbackFormGroup>
-          <InputEmail type="email" name="email" placeholder="email" />
-          <ErrorMessage name="email" />
-        </FeedbackFormGroup>
-        <FeedbackFormGroup>
-          <PasswordWrapper>
-            <InputPassword
-              type={showPassword ? 'text' : 'password'}
-              name="password"
-              placeholder="password"
-            />
-            <ToggleShowPasword onClick={togglePasswordVisibility}>
-              {showPassword ? (
-                <BsEyeSlash color="var(--border-color)" />
-              ) : (
-                <BsEye color="var(--border-color)" />
-              )}
-            </ToggleShowPasword>
-          </PasswordWrapper>
-          <ErrorMessage name="password" />
-        </FeedbackFormGroup>
-        <Btnwrapper>
-          <BtnLogIn type="submit">Log In</BtnLogIn>
-        </Btnwrapper>
-      </FormLogin>
-    </FormikStyle>
+    <>
+      <FormikStyle
+        initialValues={initialValues}
+        validationSchema={schema}
+        onSubmit={handleSubmit}
+      >
+        <FormLogin>
+          <FormLoginTitle>Login Form</FormLoginTitle>
+          <FeedbackFormGroup>
+            <InputEmail type="email" name="email" placeholder="email" />
+            <ErrorMessage name="email" />
+          </FeedbackFormGroup>
+          <FeedbackFormGroup>
+            <PasswordWrapper>
+              <InputPassword
+                type={showPassword ? 'text' : 'password'}
+                name="password"
+                placeholder="password"
+              />
+              <ToggleShowPasword onClick={togglePasswordVisibility}>
+                {showPassword ? (
+                  <BsEyeSlash color="var(--border-color)" />
+                ) : (
+                  <BsEye color="var(--border-color)" />
+                )}
+              </ToggleShowPasword>
+            </PasswordWrapper>
+            <ErrorMessage name="password" />
+          </FeedbackFormGroup>
+          <Btnwrapper>
+            <BtnLogIn type="submit">Log In</BtnLogIn>
+          </Btnwrapper>
+        </FormLogin>
+      </FormikStyle>
+      <FormPageDescription>
+        Register as a user of our film library and get access to a special
+        library page where you can save your favorite movies to your favorites
+        list and add new films to it. Create your own watchlists and enjoy
+        watching movies that are only available to our users. Register or log in
+        now and start enjoying the best movies!
+      </FormPageDescription>
+    </>
   );
 }
 export default LogInForm;

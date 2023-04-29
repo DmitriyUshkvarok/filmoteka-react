@@ -8,6 +8,7 @@ import { Navigation, Scrollbar } from 'swiper';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import {
+  CardsLoader,
   ExpectedWrapper,
   NavigationButton,
   ExpectedInfoWrapper,
@@ -49,7 +50,7 @@ const ExpectedMoviesList = () => {
     <>
       <Container>
         {loading ? (
-          <p>Loading...</p>
+          <CardsLoader size={50} color="aqua" />
         ) : (
           <>
             <ExpectedWrapper>

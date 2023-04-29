@@ -3,7 +3,7 @@ import MoviesList from 'components/MoviesList/MoviesList';
 import css from '../ActorsPage/ActorsPage.module.css';
 import {
   TitleTopRating,
-  LoadingTopRating,
+  CardsLoader,
   BtnWrapperTop,
 } from './TopRatedPage.styled';
 import { Link, useLocation } from 'react-router-dom';
@@ -60,7 +60,7 @@ const TopRatedPage = () => {
         </BtnWrapperTop>
         <TitleTopRating>Top rating movies</TitleTopRating>
         {loading ? (
-          <LoadingTopRating>Loading...</LoadingTopRating>
+          <CardsLoader size={50} />
         ) : (
           <>
             <MoviesList movies={movies} />

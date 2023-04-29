@@ -6,7 +6,9 @@ import { Route, Routes } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Header from 'components/Header/Header';
-import { Loader, StyledScrollToTop } from './App.styled';
+import { LoaderWraper, StyledScrollToTop, MainLoader } from './App.styled';
+import PrivateRoute from 'components/PrivateRoute';
+import RestictedRoute from 'components/RestictedRoute';
 
 const HomePage = lazy(() => import('../../pages/HomePage/HomePage'));
 const MoviesPage = lazy(() => import('../../pages/MoviesPage/MoviePage'));
@@ -48,20 +50,45 @@ function App() {
   useEffect(() => {
     dispatch(authOperation.refreshCurrentUser());
   }, [dispatch]);
+
   return isRefreshing ? (
-    <b>Loading...</b>
+    <LoaderWraper>
+      <MainLoader size={350} color="aqua" />
+    </LoaderWraper>
   ) : (
     <>
       <ToastContainer />
       <Header />
       <StyledScrollToTop smooth />
-      <Suspense fallback={<Loader>Loading...</Loader>}>
+      <Suspense
+        fallback={
+          <LoaderWraper>
+            <MainLoader size={350} color="aqua" />
+          </LoaderWraper>
+        }
+      >
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="movies" element={<MoviesPage />} />
-          <Route path="registration" element={<RegistrationPage />} />
-          <Route path="login" element={<LoginPage />} />
-          <Route path="library" element={<LibraryPage />} />
+          <Route
+            path="registration"
+            element={
+              <RestictedRoute redirectTo="/" component={<RegistrationPage />} />
+            }
+          />
+          <Route
+            path="login"
+            element={
+              <RestictedRoute redirectTo="/" component={<LoginPage />} />
+            }
+          />
+
+          <Route
+            path="library"
+            element={
+              <PrivateRoute redirectTo="/login" component={<LibraryPage />} />
+            }
+          ></Route>
           <Route path="movie/actors/" element={<ActorsPage />} />
           <Route path="/actors/movies/:id" element={<ActorsMoviePage />}>
             <Route path="actors-info" element={<ActorsInfo />} />

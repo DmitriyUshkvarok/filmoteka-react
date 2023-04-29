@@ -1,5 +1,25 @@
 import styled from 'styled-components';
 import DebounceInput from 'react-debounce-input';
+import { FaReact } from 'react-icons/fa';
+
+export const CardsLoader = styled(FaReact)`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color);
+  margin-left: auto;
+  margin-right: auto;
+  animation: rotate 5s infinite linear;
+  -webkit-animation: rotate 5s infinite linear;
+  @keyframes rotate {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+`;
 
 export const Search = styled.div`
   display: flex;

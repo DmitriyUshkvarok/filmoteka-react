@@ -3,6 +3,7 @@ import MoviesList from 'components/MoviesList/MoviesList';
 import apiTheMovieDB from 'service/kino-api';
 import ButtonBack from 'components/ButtonBack/ButtonBack';
 import {
+  CardsLoader,
   ExpectedTitle,
   BtnBackExpectedWrapper,
 } from './ExpectedMoviePage.styled';
@@ -58,7 +59,7 @@ const ExpectedMoviePage = () => {
         </BtnBackExpectedWrapper>
         <ExpectedTitle>Expected Movies </ExpectedTitle>
         {loading ? (
-          <p>Loading...</p>
+          <CardsLoader size={50} />
         ) : (
           <>
             <MoviesList movies={movies} />
