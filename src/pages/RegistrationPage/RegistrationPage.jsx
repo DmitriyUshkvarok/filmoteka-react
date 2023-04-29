@@ -1,4 +1,4 @@
-import MainForm from 'components/MainForm/MainForm';
+import MainForm from 'components/MainForm/RegistrationForm/RegistrationForm';
 import Container from 'components/Container/Container';
 
 function RegistrationPage() {

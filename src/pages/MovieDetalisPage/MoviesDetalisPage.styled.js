@@ -59,6 +59,7 @@ export const IconBack = styled.img`
 export const InfoTitle = styled.h1`
   max-width: 700px;
   font-size: 70px;
+  text-align: left;
   color: var(--color);
   text-shadow: 0 0 1px black;
   margin-bottom: 10px;
@@ -98,8 +99,11 @@ export const Overview = styled.p`
 
 export const GenreListDetails = styled.ul`
   display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  align-items: center;
   gap: 10px;
-  color: gold;
+  color: var(--border-color);
 `;
 
 export const ColumnImg = styled.div`
@@ -157,8 +161,9 @@ export const DetalisImg = styled.img`
 export const ReviewList = styled.ul`
   display: flex;
   align-items: center;
+  justify-content: start;
   flex-wrap: wrap;
-  gap: 30px;
+  gap: 10px;
   margin-bottom: 20px;
   margin-top: 20px;
 `;

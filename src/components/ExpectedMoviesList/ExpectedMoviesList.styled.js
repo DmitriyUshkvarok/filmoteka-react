@@ -6,6 +6,7 @@ export const ExpectedWrapper = styled.div`
   overflow: hidden;
   margin-top: 150px;
   padding: 5px;
+  height: 100%;
 `;
 
 export const NavigationButton = styled.div`
@@ -41,20 +42,14 @@ export const NavigationButton = styled.div`
   }
 `;
 
-export const ExpectedInfoWrapper = styled.div`
-  display: flex;
-  justify-content: space-between;
-`;
-
-export const ExpectedInfoContainer = styled.div`
-  padding: 5px;
-`;
-
 export const StyledSwiperSlide = styled(SwiperSlide)`
   width: 100%;
   height: 100%;
-  background: #232526;
+  min-height: 330px;
   background: var(--background-movies-item);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   padding: 5px;
   font-size: 14px;
   color: var(--color);
@@ -63,18 +58,12 @@ export const StyledSwiperSlide = styled(SwiperSlide)`
   box-sizing: border-box;
 `;
 
-export const StyledAiFillFastForward = styled(AiFillFastForward)`
-  color: var(--color);
-`;
-export const StyledAiFillFastBackward = styled(AiFillFastBackward)`
-  color: var(--color);
-`;
 export const ImgExpectedWrapper = styled.div`
   overflow: hidden;
 `;
 
 export const ExpectedImg = styled.img`
-  width: 100%;
+  max-width: 100%;
   object-fit: cover;
   transition: transform 0.4s;
   -webkit-transition: transform 0.4s;
@@ -92,13 +81,33 @@ export const ExpectedImg = styled.img`
   }
 `;
 
+export const ExpectedInfoContainer = styled.div`
+  padding: 5px;
+  display: flex;
+  flex-direction: column;
+  margin-top: auto;
+`;
+
 export const ExpectedTitle = styled.p`
   text-overflow: ellipsis;
   overflow: hidden;
-  width: 180px;
+  width: 160px;
   white-space: nowrap;
   margin-bottom: 5px;
   font-weight: bold;
+`;
+
+export const ExpectedInfoWrapper = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+`;
+
+export const StyledAiFillFastForward = styled(AiFillFastForward)`
+  color: var(--color);
+`;
+export const StyledAiFillFastBackward = styled(AiFillFastBackward)`
+  color: var(--color);
 `;
 
 /* Задаем разные цвета для рейтингов */
@@ -128,7 +137,7 @@ export const ExpextedRating = styled.p`
   align-items: center;
   border-radius: 50%;
   width: 10px;
-  heigth: 10px;
+  height: 10px;
   padding: 5px;
   font-weight: bold;
   font-size: 8px;

@@ -18,6 +18,8 @@ const RegistrationPage = lazy(() =>
   import('../../pages/RegistrationPage/RegistrationPage')
 );
 
+const LoginPage = lazy(() => import('../../pages/LoginPage/LoginPage'));
+
 const ActorsMoviePage = lazy(() =>
   import('../../pages/ActorsMoviePage/ActorsMoviePage')
 );
@@ -47,6 +49,7 @@ function App() {
           <Route path="/" element={<HomePage />} />
           <Route path="movies" element={<MoviesPage />} />
           <Route path="registration" element={<RegistrationPage />} />
+          <Route path="login" element={<LoginPage />} />
           <Route path="library" element={<LibraryPage />} />
           <Route path="movie/actors/" element={<ActorsPage />} />
           <Route path="/actors/movies/:id" element={<ActorsMoviePage />}>

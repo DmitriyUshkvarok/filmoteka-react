@@ -8,6 +8,7 @@ export const BtnBackWrapper = styled.div`
 export const ActorsMoviesTitle = styled.h2`
   margin-bottom: 30px;
   text-transform: uppercase;
+  text-align: center;
   color: var(--color);
   font-size: 21px;
   display: flex;

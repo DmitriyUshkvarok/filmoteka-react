@@ -1,6 +1,8 @@
-import css from './MainForm.module.css';
+import css from './RegistrationForm.module.css';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as yup from 'yup';
+import { useDispatch } from 'react-redux';
+import authOperation from 'redux/auth/auth-operation';
 
 const initialValues = {
   name: '',
@@ -14,8 +16,11 @@ const schema = yup.object().shape({
   password: yup.string().min(10).max(20).required(),
 });
 
-function MainForm() {
+function RegistrationForm() {
+  const dispatch = useDispatch();
+
   const handleSubmit = (values, { resetForm }) => {
+    dispatch(authOperation.register(values));
     resetForm();
   };
 
@@ -58,12 +63,9 @@ function MainForm() {
           <button className={css.btnRegister} type="submit">
             Registration
           </button>
-          <button className={css.btnLogIn} type="submit">
-            Log In
-          </button>
         </div>
       </Form>
     </Formik>
   );
 }
-export default MainForm;
+export default RegistrationForm;

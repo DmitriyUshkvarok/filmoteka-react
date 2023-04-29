@@ -14,9 +14,6 @@ function Navigation() {
         <NavLink className={css.navigationLink} to="/library">
           Library
         </NavLink>
-        <NavLink className={css.navigationLink} to="/registration">
-          Registration
-        </NavLink>
       </nav>
     </div>
   );

@@ -96,7 +96,7 @@ export const RatingBlock = styled.div`
   align-items: center;
   border-radius: 50%;
   width: 10px;
-  heigth: 10px;
+  height: 10px;
   padding: 5px;
   font-weight: bold;
   margin-left: 10px;

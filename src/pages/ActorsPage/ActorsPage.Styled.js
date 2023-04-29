@@ -10,7 +10,7 @@ export const Search = styled.div`
 `;
 
 export const ActorList = styled.ul`
-  margin-top: 90px;
+  margin-top: 20px;
   margin-bottom: 50px;
   display: flex;
   flex-wrap: wrap;

@@ -102,7 +102,6 @@ const ExpectedMoviesList = () => {
                                   : 'https://via.placeholder.com/300x400'
                               }
                               alt={title}
-                              width={177}
                             />
                           </Link>
                         </ImgExpectedWrapper>
