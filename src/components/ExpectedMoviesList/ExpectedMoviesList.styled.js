@@ -23,16 +23,16 @@ export const CardsLoader = styled(FaReact)`
 
 export const ExpectedWrapper = styled.div`
   overflow: hidden;
-  margin-top: 150px;
+  margin-top: 190px;
   padding: 5px;
   height: 100%;
 
   @media screen and (max-width: 705px) {
-    margin-top: 190px;
+    margin-top: 230px;
   }
 
   @media screen and (max-width: 380px) {
-    margin-top: 230px;
+    margin-top: 250px;
   }
 `;
 

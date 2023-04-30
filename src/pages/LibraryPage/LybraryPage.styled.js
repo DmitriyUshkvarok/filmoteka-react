@@ -1,18 +1,18 @@
 import styled from 'styled-components';
 
 export const LibrarryTitle = styled.h1`
-  margin-top: 150px;
+  margin-top: 190px;
   margin-bottom: 50px;
   color: var(--color);
   display: flex;
   justify-content: center;
 
   @media screen and (max-width: 705px) {
-    margin-top: 190px;
+    margin-top: 230px;
   }
 
   @media screen and (max-width: 380px) {
-    margin-top: 230px;
+    margin-top: 250px;
   }
 `;
 
