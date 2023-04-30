@@ -1,5 +1,17 @@
-import css from './RegistrationForm.module.css';
-import { Formik, Form, Field, ErrorMessage } from 'formik';
+import {
+  FormRegistration,
+  FormRegistrationTitle,
+  FeedbackFormGroup,
+  PasswordWrapper,
+  InputForm,
+  ToggleShowPasword,
+  Btnwrapper,
+  BtnRegister,
+  FormPageDescription,
+  StyleErrorMessage,
+  Error,
+} from './RegistrationForm.styled';
+import { Formik } from 'formik';
 import * as yup from 'yup';
 import { useDispatch } from 'react-redux';
 import authOperation from 'redux/auth/auth-operation';
@@ -38,61 +50,51 @@ function RegistrationForm() {
         validationSchema={schema}
         onSubmit={handleSubmit}
       >
-        <Form className={css.formRegistration}>
-          <h2 className={css.formRegistrationTitle}>Form Registration</h2>
-          <div className={css.feedbackFormGroup}>
-            <Field
-              className={css.inputName}
-              type="text"
-              name="name"
-              placeholder="name"
-            />
-            <ErrorMessage name="name" />
-          </div>
-          <div className={css.feedbackFormGroup}>
-            <Field
-              className={css.inputEmail}
-              type="email"
-              name="email"
-              placeholder="email"
-            />
-            <ErrorMessage name="email" />
-          </div>
-          <div className={css.feedbackFormGroup}>
-            <div className={css.passwordWrapper}>
-              <Field
-                className={css.inputPassword}
+        <FormRegistration>
+          <FormRegistrationTitle>Form Registration</FormRegistrationTitle>
+          <FeedbackFormGroup>
+            <InputForm type="text" name="name" placeholder="name" />
+            <StyleErrorMessage name="name">
+              {msg => <Error>{msg}</Error>}
+            </StyleErrorMessage>
+          </FeedbackFormGroup>
+          <FeedbackFormGroup>
+            <InputForm type="email" name="email" placeholder="email" />
+            <StyleErrorMessage name="email">
+              {msg => <Error>{msg}</Error>}
+            </StyleErrorMessage>
+          </FeedbackFormGroup>
+          <FeedbackFormGroup>
+            <PasswordWrapper>
+              <InputForm
                 type={showPassword ? 'text' : 'password'}
                 name="password"
                 placeholder="password"
               />
-              <span
-                className={css.toggleShowPasword}
-                onClick={togglePasswordVisibility}
-              >
+              <ToggleShowPasword onClick={togglePasswordVisibility}>
                 {showPassword ? (
                   <BsEyeSlash color="var(--border-color)" />
                 ) : (
                   <BsEye color="var(--border-color)" />
                 )}
-              </span>
-            </div>
-            <ErrorMessage className={css.errorInput} name="password" />
-          </div>
-          <div className={css.btnwrapper}>
-            <button className={css.btnRegister} type="submit">
-              Registration
-            </button>
-          </div>
-        </Form>
+              </ToggleShowPasword>
+            </PasswordWrapper>
+            <StyleErrorMessage name="password">
+              {msg => <Error>{msg}</Error>}
+            </StyleErrorMessage>
+          </FeedbackFormGroup>
+          <Btnwrapper>
+            <BtnRegister type="submit">Registration</BtnRegister>
+          </Btnwrapper>
+        </FormRegistration>
       </Formik>
-      <p className={css.formPageDescription}>
+      <FormPageDescription>
         Register as a user of our film library and get access to a special
         library page where you can save your favorite movies to your favorites
         list and add new films to it. Create your own watchlists and enjoy
         watching movies that are only available to our users. Register or log in
         now and start enjoying the best movies!
-      </p>
+      </FormPageDescription>
     </>
   );
 }

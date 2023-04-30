@@ -27,6 +27,14 @@ export const Search = styled.div`
   align-items: center;
   margin-top: 150px;
   margin-bottom: 20px;
+
+  @media screen and (max-width: 705px) {
+    margin-top: 190px;
+  }
+
+  @media screen and (max-width: 380px) {
+    margin-top: 230px;
+  }
 `;
 
 export const ActorList = styled.ul`

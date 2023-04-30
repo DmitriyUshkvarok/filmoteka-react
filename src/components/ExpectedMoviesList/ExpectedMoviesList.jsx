@@ -66,11 +66,19 @@ const ExpectedMoviesList = () => {
                     slidesPerView: 1,
                   },
                   480: {
+                    slidesPerView: 2,
+                    spaceBetween: 10,
+                  },
+                  680: {
                     slidesPerView: 3,
                     spaceBetween: 10,
                   },
                   768: {
-                    slidesPerView: 4,
+                    slidesPerView: 3,
+                    spaceBetween: 10,
+                  },
+                  1000: {
+                    slidesPerView: 5,
                     spaceBetween: 10,
                   },
                   1200: {

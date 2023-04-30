@@ -6,6 +6,14 @@ export const LibrarryTitle = styled.h1`
   color: var(--color);
   display: flex;
   justify-content: center;
+
+  @media screen and (max-width: 705px) {
+    margin-top: 190px;
+  }
+
+  @media screen and (max-width: 380px) {
+    margin-top: 230px;
+  }
 `;
 
 export const FavoritesList = styled.ul`

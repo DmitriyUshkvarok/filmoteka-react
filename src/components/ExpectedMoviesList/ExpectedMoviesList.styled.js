@@ -26,6 +26,14 @@ export const ExpectedWrapper = styled.div`
   margin-top: 150px;
   padding: 5px;
   height: 100%;
+
+  @media screen and (max-width: 705px) {
+    margin-top: 190px;
+  }
+
+  @media screen and (max-width: 380px) {
+    margin-top: 230px;
+  }
 `;
 
 export const NavigationButton = styled.div`

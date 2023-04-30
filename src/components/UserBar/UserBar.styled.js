@@ -8,13 +8,13 @@ export const Wrapper = styled.div`
 `;
 
 export const WelcomeMessage = styled.p`
-  font-size: 18px;
+  font-size: 14px;
   color: var(--border-color);
-  text-transform: uppercase;
+  /* text-transform: uppercase; */
 `;
 
 export const Email = styled.p`
-  font-size: 18px;
+  font-size: 14px;
   opacity: 0.6;
   color: var(--border-color);
 `;

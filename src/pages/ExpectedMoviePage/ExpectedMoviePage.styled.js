@@ -34,4 +34,12 @@ export const BtnBackExpectedWrapper = styled.h1`
   font-size: 21px;
   margin-top: 150px;
   margin-bottom: 30px;
+
+  @media screen and (max-width: 705px) {
+    margin-top: 190px;
+  }
+
+  @media screen and (max-width: 380px) {
+    margin-top: 230px;
+  }
 `;

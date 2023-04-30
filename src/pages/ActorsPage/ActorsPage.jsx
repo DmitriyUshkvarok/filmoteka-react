@@ -16,6 +16,7 @@ import { toast } from 'react-toastify';
 import ReactPaginate from 'react-paginate';
 import { useLocation, Link } from 'react-router-dom';
 import ButtonBack from 'components/ButtonBack/ButtonBack';
+import { animateScroll as scroll } from 'react-scroll';
 
 function ActorsPage() {
   const [actors, setActors] = useState([]);
@@ -59,6 +60,10 @@ function ActorsPage() {
 
   const handlePageChange = ({ selected }) => {
     setCurrentPage(selected + 1);
+    scroll.scrollToTop({
+      duration: 1000,
+      smooth: 'easeInOutQuad',
+    });
   };
 
   const handleSearchChange = event => {

@@ -1,9 +1,7 @@
 import styled from 'styled-components';
-import { Formik, Form, Field, ErrorMessage } from 'formik';
+import { Form, Field, ErrorMessage } from 'formik';
 
-export const FormikStyle = styled(Formik)``;
-
-export const FormLogin = styled(Form)`
+export const FormRegistration = styled(Form)`
   max-width: 700px;
   display: flex;
   flex-direction: column;
@@ -23,7 +21,7 @@ export const FormLogin = styled(Form)`
   margin-top: 150px;
 `;
 
-export const FormLoginTitle = styled.h2`
+export const FormRegistrationTitle = styled.h2`
   display: flex;
   justify-content: center;
   align-items: center;
@@ -37,6 +35,28 @@ export const PasswordWrapper = styled.div`
   position: relative;
 `;
 
+export const InputForm = styled(Field)`
+  box-sizing: border-box;
+  width: 100%;
+  height: 30px;
+  padding: 5px;
+  background-color: transparent;
+  border: 1px solid var(--border-color);
+  border-radius: 5px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  -ms-border-radius: 5px;
+  -o-border-radius: 5px;
+  outline: none;
+  color: var(--color);
+  font-size: 18px;
+
+  &::placeholder {
+    opacity: 0.4;
+    font-size: 15px;
+  }
+`;
+
 export const ToggleShowPasword = styled.span`
   position: absolute;
   top: 50%;
@@ -48,65 +68,13 @@ export const ToggleShowPasword = styled.span`
   -o-transform: translate(-50%, -10px);
 `;
 
-export const InputEmail = styled(Field)`
-  box-sizing: border-box;
-  width: 100%;
-  height: 30px;
-  padding: 5px;
-  background-color: transparent;
-  border: 1px solid var(--border-color);
-  border-radius: 5px;
-  -webkit-border-radius: 5px;
-  -moz-border-radius: 5px;
-  -ms-border-radius: 5px;
-  -o-border-radius: 5px;
-  color: var(--color);
-  font-size: 18px;
-  outline: none;
-
-  &::placeholder {
-    opacity: 0.4;
-    font-size: 15px;
-  }
-`;
-
-export const InputPassword = styled(Field)`
-  box-sizing: border-box;
-  width: 100%;
-  height: 30px;
-  padding: 5px;
-  background-color: transparent;
-  border: 1px solid var(--border-color);
-  border-radius: 5px;
-  -webkit-border-radius: 5px;
-  -moz-border-radius: 5px;
-  -ms-border-radius: 5px;
-  -o-border-radius: 5px;
-  outline: none;
-  color: var(--color);
-  font-size: 18px;
-
-  &::placeholder {
-    opacity: 0.4;
-    font-size: 15px;
-  }
-`;
-
-export const StyleErrorMessage = styled(ErrorMessage)``;
-
-export const Error = styled.div`
-  color: red;
-  font-size: 15px;
-  margin-top: 10px;
-`;
-
 export const Btnwrapper = styled.div`
   width: 100%;
   display: flex;
   gap: 10px;
 `;
 
-export const BtnLogIn = styled.button`
+export const BtnRegister = styled.button`
   box-sizing: border-box;
   display: flex;
   justify-content: center;
@@ -139,4 +107,12 @@ export const FormPageDescription = styled.p`
   color: var(--color);
   font-size: 18px;
   line-height: 24px;
+`;
+
+export const StyleErrorMessage = styled(ErrorMessage)``;
+
+export const Error = styled.div`
+  color: red;
+  font-size: 15px;
+  margin-top: 10px;
 `;

@@ -8,6 +8,7 @@ import AuthNav from 'components/AuthNav/AuthNav';
 import { useSelector } from 'react-redux';
 import authSelector from 'redux/auth/auth-selector';
 import UserBar from 'components/UserBar/UserBar';
+// import BellNotification from 'components/BellNotification/BellNotification';
 
 function Header() {
   const isLoggedIn = useSelector(authSelector.getIsLoggedIn);
@@ -21,6 +22,7 @@ function Header() {
             <Navigation />
             {isLoggedIn ? <UserBar /> : <AuthNav />}
           </div>
+          {/* <BellNotification /> */}
           <div className={css.logo}>
             <Link to="/">
               <FaReact className={css.reactLogo} />

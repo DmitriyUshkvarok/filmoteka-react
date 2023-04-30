@@ -40,4 +40,12 @@ export const LoadingTopRating = styled.p`
 
 export const BtnWrapperTop = styled.p`
   margin-top: 150px;
+
+  @media screen and (max-width: 705px) {
+    margin-top: 190px;
+  }
+
+  @media screen and (max-width: 380px) {
+    margin-top: 230px;
+  }
 `;

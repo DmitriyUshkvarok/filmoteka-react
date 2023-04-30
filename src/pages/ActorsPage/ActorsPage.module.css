@@ -9,12 +9,17 @@
     margin: 0 0.5rem;
     cursor: pointer;
     padding: 0.25rem 0.5rem;
-    border-radius: 0.25rem;
+    border-radius: 0.30rem;
+    -webkit-border-radius: 0.30rem;
+    -moz-border-radius: 0.30rem;
+    -ms-border-radius: 0.30rem;
+    -o-border-radius: 0.30rem;
+    color: var(--color);
 }
 
 .active {
-    background-color: #007bff;
-    color: #fff;
+    background-color: var(--color);
+    color: var(--hover-color-text);
 }
 
 
@@ -24,6 +29,7 @@
     cursor: pointer;
     padding: 0.25rem 0.5rem;
     border-radius: 0.25rem;
+    color: var(--color);
 }
 
 

@@ -1,11 +1,18 @@
 import { useState, useEffect } from 'react';
-import css from './SearchByYear.module.css';
+import {
+  CardsLoader,
+  SelectWrapper,
+  SelectedYear,
+  SelectLabel,
+  SearchText,
+  StyleSelect,
+} from './SearchByYear.styled';
 import apiTheMovieDB from 'service/kino-api';
 import { toast } from 'react-toastify';
 import MoviesList from 'components/MoviesList/MoviesList';
 import ButtonLoadMore from 'components/ButtonLoadMore/ButtonLoadMore';
-import Select from 'react-select';
 import Container from 'components/Container/Container';
+import { animateScroll as scroll } from 'react-scroll';
 
 function SearchByYears() {
   const [selectedYear, setSelectedYear] = useState(0);
@@ -56,48 +63,43 @@ function SearchByYears() {
 
   const hendleIncrement = () => {
     setPage(page + 1);
+
+    scroll.scrollToBottom({
+      duration: 2000,
+      smooth: 'easeInOutQuad',
+      offset: 0.2,
+    });
   };
 
   return (
     <>
       <Container>
-        <div className={css.selectedWrapper}>
-          <div className={css.selectedYear}>
-            <label className={css.selectLabel} htmlFor="year-select">
-              Select a year:
-            </label>
-            <div className={css.selectWrapper}>
-              <Select
-                className={css.select}
-                classNamePrefix="react-select"
-                name="year-select"
-                id="year-select"
-                value={{ value: selectedYear, label: selectedYear }}
-                onChange={selectedOption =>
-                  setSelectedYear(selectedOption.value)
-                }
-                options={yearOptions.map(year => ({
-                  value: year,
-                  label: year,
-                }))}
-                placeholder="Select a year"
-                menuPlacement="auto"
-              />
-              <div className={css.selectIcon}></div>
-            </div>
-          </div>
-
-          {movies.length > 0 ? (
-            <MoviesList movies={movies} />
-          ) : loading ? (
-            <p className={css.loadingMoviesListYear}>Loading...</p>
-          ) : (
-            <p className={css.searchText}>
-              Please select a year to see movies.
-            </p>
-          )}
-          {showButton && <ButtonLoadMore hendleIncrement={hendleIncrement} />}
-        </div>
+        <SelectWrapper>
+          <SelectedYear>
+            <SelectLabel htmlFor="year-select">Select a year:</SelectLabel>
+            <StyleSelect
+              classNamePrefix="react-select"
+              name="year-select"
+              id="year-select"
+              value={{ value: selectedYear, label: selectedYear }}
+              onChange={selectedOption => setSelectedYear(selectedOption.value)}
+              options={yearOptions.map(year => ({
+                value: year,
+                label: year,
+              }))}
+              placeholder="Select a year"
+              menuPlacement="auto"
+            />
+          </SelectedYear>
+        </SelectWrapper>
+        {movies.length > 0 ? (
+          <MoviesList movies={movies} />
+        ) : loading ? (
+          <CardsLoader size={50} />
+        ) : (
+          <SearchText>Please select a year to see movies.</SearchText>
+        )}
+        {showButton && <ButtonLoadMore hendleIncrement={hendleIncrement} />}
       </Container>
     </>
   );

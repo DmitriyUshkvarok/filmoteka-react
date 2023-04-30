@@ -1,6 +1,6 @@
 import { toast } from 'react-toastify';
 import PropTypes from 'prop-types';
-import css from './Searchbar.module.css';
+import { Form, InputSearch, SerchBtn } from './Searchbar.styled';
 import { useState } from 'react';
 
 function Searchbar({ onSubmit }) {
@@ -22,9 +22,8 @@ function Searchbar({ onSubmit }) {
   };
 
   return (
-    <form className={css.form} onSubmit={handleSubmit}>
-      <input
-        className={css.inputSearch}
+    <Form onSubmit={handleSubmit}>
+      <InputSearch
         name="query"
         value={query}
         type="text"
@@ -32,10 +31,8 @@ function Searchbar({ onSubmit }) {
         placeholder="Enter the movie name"
         onChange={handleQueryChange}
       />
-      <button type="submit" className={css.serchBtn}>
-        Search
-      </button>
-    </form>
+      <SerchBtn>Search</SerchBtn>
+    </Form>
   );
 }
 

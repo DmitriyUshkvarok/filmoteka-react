@@ -10,8 +10,9 @@ import {
   PasswordWrapper,
   ToggleShowPasword,
   FormPageDescription,
+  StyleErrorMessage,
+  Error,
 } from './LoginForm.styles.js';
-import { ErrorMessage } from 'formik';
 import * as yup from 'yup';
 import { useDispatch } from 'react-redux';
 import authOperation from 'redux/auth/auth-operation';
@@ -52,7 +53,9 @@ function LogInForm() {
           <FormLoginTitle>Login Form</FormLoginTitle>
           <FeedbackFormGroup>
             <InputEmail type="email" name="email" placeholder="email" />
-            <ErrorMessage name="email" />
+            <StyleErrorMessage name="email">
+              {msg => <Error>{msg}</Error>}
+            </StyleErrorMessage>
           </FeedbackFormGroup>
           <FeedbackFormGroup>
             <PasswordWrapper>
@@ -69,7 +72,9 @@ function LogInForm() {
                 )}
               </ToggleShowPasword>
             </PasswordWrapper>
-            <ErrorMessage name="password" />
+            <StyleErrorMessage name="password">
+              {msg => <Error>{msg}</Error>}
+            </StyleErrorMessage>
           </FeedbackFormGroup>
           <Btnwrapper>
             <BtnLogIn type="submit">Log In</BtnLogIn>

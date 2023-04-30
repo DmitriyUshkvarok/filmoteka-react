@@ -1,21 +1,18 @@
-import css from './Navigation.module.css';
-import { NavLink } from 'react-router-dom';
+import {
+  NavWrapper,
+  NavigationWrapper,
+  NavigationLink,
+} from './Navigation.styled';
 
 function Navigation() {
   return (
-    <div className={css.navWrapper}>
-      <nav className={css.navigation}>
-        <NavLink className={css.navigationLink} to="/">
-          Home
-        </NavLink>
-        <NavLink className={css.navigationLink} to="/movies">
-          Movies
-        </NavLink>
-        <NavLink className={css.navigationLink} to="/library">
-          Library
-        </NavLink>
-      </nav>
-    </div>
+    <NavWrapper>
+      <NavigationWrapper>
+        <NavigationLink to="/">Home</NavigationLink>
+        <NavigationLink to="/movies">Movies</NavigationLink>
+        <NavigationLink to="/library">Library</NavigationLink>
+      </NavigationWrapper>
+    </NavWrapper>
   );
 }
 
