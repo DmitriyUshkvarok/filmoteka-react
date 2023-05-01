@@ -9,8 +9,8 @@ import {
   MoviesImg,
   CardTitle,
   RatingStarsContainer,
-  RatingNumber,
   MoviesYear,
+  ExpextedRating,
 } from './LybraryPage.styled';
 
 const LibraryPage = () => {
@@ -28,34 +28,49 @@ const LibraryPage = () => {
         <LibrarryTitle>Favorites</LibrarryTitle>
         <FavoritesList>
           {favoritesList.map(
-            ({ id, poster_path, title, vote_average, release_date }) => (
-              <Link to={`/movies/${id}`} state={{ from: location }} key={id}>
-                <FavoritesItem key={id}>
-                  <ImgWrapper>
-                    <MoviesImg
-                      src={
-                        poster_path
-                          ? `https://image.tmdb.org/t/p/w500/${poster_path}`
-                          : 'https://via.placeholder.com/300x400'
-                      }
-                      alt={title}
-                      width={300}
-                    />
-                  </ImgWrapper>
-                  <CardTitle>
-                    {title ? title : 'Movie without a title'}
-                  </CardTitle>
-                  <RatingStarsContainer>
-                    <RatingNumber>
-                      {vote_average ? vote_average : 'N/A'}
-                    </RatingNumber>
-                    <MoviesYear>
-                      {release_date ? release_date : 'N/A'}
-                    </MoviesYear>
-                  </RatingStarsContainer>
-                </FavoritesItem>
-              </Link>
-            )
+            ({ id, poster_path, title, vote_average, release_date }) => {
+              const getRatingColor = () => {
+                if (vote_average <= 4) {
+                  return 'red';
+                } else if (vote_average < 7) {
+                  return 'yellow';
+                } else {
+                  return 'green';
+                }
+              };
+              const ratingColor = getRatingColor();
+              const ratingClassName = `rating-${ratingColor}`;
+              return (
+                <Link to={`/movies/${id}`} state={{ from: location }} key={id}>
+                  <FavoritesItem key={id}>
+                    <ImgWrapper>
+                      <MoviesImg
+                        src={
+                          poster_path
+                            ? `https://image.tmdb.org/t/p/w500/${poster_path}`
+                            : 'https://via.placeholder.com/300x400'
+                        }
+                        alt={title}
+                        width={300}
+                      />
+                    </ImgWrapper>
+                    <CardTitle>
+                      {title ? title : 'Movie without a title'}
+                    </CardTitle>
+                    <RatingStarsContainer>
+                      <ExpextedRating className={ratingClassName}>
+                        {typeof vote_average === 'number'
+                          ? vote_average.toFixed(1)
+                          : 'N/A'}
+                      </ExpextedRating>
+                      <MoviesYear>
+                        {release_date ? release_date : 'N/A'}
+                      </MoviesYear>
+                    </RatingStarsContainer>
+                  </FavoritesItem>
+                </Link>
+              );
+            }
           )}
         </FavoritesList>
       </Container>

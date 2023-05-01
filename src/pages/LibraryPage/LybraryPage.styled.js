@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 export const LibrarryTitle = styled.h1`
   margin-top: 190px;
@@ -72,9 +72,52 @@ export const RatingStarsContainer = styled.div`
   justify-content: space-between;
 `;
 
-export const RatingNumber = styled.span`
+/* Задаем разные цвета для рейтингов */
+export const red = css`
+  background: #f85032;
+  background: -webkit-linear-gradient(to right, #e73827, #f85032);
+  background: linear-gradient(to right, #e73827, #f85032);
+`;
+
+export const yellow = css`
+  background: #f7971e;
+  background: -webkit-linear-gradient(to right, #ffd200, #f7971e);
+  background: linear-gradient(to right, #ffd200, #f7971e);
+  color: rgb(36, 35, 35);
+`;
+
+export const green = css`
+  background: #000000;
+  background: -webkit-linear-gradient(to right, #0f9b0f, #000000);
+  background: linear-gradient(to right, #0f9b0f, #000000);
+  color: #fff;
+`;
+
+export const ExpextedRating = styled.p`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  width: 10px;
+  height: 10px;
+  padding: 5px;
+  font-weight: bold;
   font-size: 8px;
-  color: var(--color);
+
+  // добавляем стили для класса rating-red
+  &.rating-red {
+    ${red}
+  }
+
+  // добавляем стили для класса rating-yellow
+  &.rating-yellow {
+    ${yellow}
+  }
+
+  // добавляем стили для класса rating-green
+  &.rating-green {
+    ${green}
+  }
 `;
 
 export const MoviesYear = styled.p`

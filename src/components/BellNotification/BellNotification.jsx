@@ -1,36 +1,56 @@
 import {
+  BackDrop,
+  BellListWrapper,
   BellWrapper,
   CardsLoader,
   BellList,
   BellListItem,
   BellImg,
   BellTitle,
+  BellDateRelis,
 } from './BellNotification.styled';
 import { TbBellPlusFilled, TbBellMinusFilled } from 'react-icons/tb';
 import apiTheMovieDB from 'service/kino-api';
 import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
+import ButtonLoadMore from 'components/ButtonLoadMore/ButtonLoadMore';
+import { toast } from 'react-toastify';
 
 const BellNotification = () => {
   const location = useLocation();
 
   const [movies, setMovies] = useState([]);
+  const [page, setPage] = useState(1);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [showList, setShowList] = useState(false);
   const [viewed, setViewed] = useState(false);
+  const [showButton, setShowButton] = useState(false);
 
   useEffect(() => {
-    apiTheMovieDB
-      .fetchNewMoviesNotification()
-      .then(movies => {
-        setMovies(movies);
-      })
-      .catch(error => {
-        setError(error);
-      })
-      .finally(() => setLoading(false));
-  }, []);
+    if (showList) {
+      apiTheMovieDB
+        .fetchNewMoviesNotification(page)
+        .then(movies => {
+          setMovies(prevMovies => [...prevMovies, ...movies]);
+          if (movies.length === 0) {
+            setShowButton(false);
+            if (page === 1) {
+              setMovies([]);
+              toast.error("Sorry, we couldn't find any movies for that year.");
+            } else {
+              toast.error("That's all the movies we could find for that year.");
+            }
+          } else {
+            setShowButton(true);
+          }
+        })
+        .catch(error => {
+          setError(error);
+        })
+        .finally(() => setLoading(false));
+    }
+  }, [page, showList]);
 
   if (error) {
     return <p>{error.message}</p>;
@@ -44,6 +64,17 @@ const BellNotification = () => {
   const closeListNavigate = () => {
     setShowList(false);
     setViewed(!viewed);
+  };
+
+  const hendleIncrement = () => {
+    setPage(prevPage => prevPage + 1);
+  };
+
+  const clickBackdrop = e => {
+    if (e.currentTarget === e.target) {
+      setShowList(false);
+      setViewed(!viewed);
+    }
   };
 
   return (
@@ -64,35 +95,41 @@ const BellNotification = () => {
         )}
       </BellWrapper>
       {showList && (
-        <BellList>
-          {loading ? (
-            <CardsLoader size={50} />
-          ) : (
-            movies.map(({ poster_path, title, id }) => (
-              <Link
-                key={id}
-                to={`/movies/${id}`}
-                state={{ from: location }}
-                onClick={closeListNavigate}
-              >
-                <BellListItem key={id}>
-                  <BellImg
-                    src={
-                      poster_path
-                        ? `https://image.tmdb.org/t/p/w500/${poster_path}`
-                        : 'https://via.placeholder.com/200x300'
-                    }
-                    alt={title}
-                    width={50}
-                  />
-                  <BellTitle>
-                    {title ? title : 'Movie without a title'}
-                  </BellTitle>
-                </BellListItem>
-              </Link>
-            ))
-          )}
-        </BellList>
+        <BackDrop onClick={clickBackdrop}>
+          <BellListWrapper>
+            <BellList>
+              {loading ? (
+                <CardsLoader size={50} />
+              ) : (
+                movies.map(({ poster_path, title, id, release_date }) => (
+                  <Link
+                    key={`${id}`}
+                    to={`/movies/${id}`}
+                    state={{ from: location }}
+                    onClick={closeListNavigate}
+                  >
+                    <BellListItem key={id}>
+                      <BellImg
+                        src={
+                          poster_path
+                            ? `https://image.tmdb.org/t/p/w500/${poster_path}`
+                            : 'https://via.placeholder.com/200x300'
+                        }
+                        alt={title}
+                        width={50}
+                      />
+                      <BellTitle>
+                        {title ? title : 'Movie without a title'}
+                      </BellTitle>
+                      <BellDateRelis>{release_date}</BellDateRelis>
+                    </BellListItem>
+                  </Link>
+                ))
+              )}
+            </BellList>
+            {showButton && <ButtonLoadMore hendleIncrement={hendleIncrement} />}
+          </BellListWrapper>
+        </BackDrop>
       )}
     </>
   );

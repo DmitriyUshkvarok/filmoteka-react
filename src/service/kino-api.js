@@ -99,9 +99,9 @@ function fetchWaitingForTheMovies(currentPage = 1) {
     .then(response => response.data);
 }
 
-function fetchNewMoviesNotification() {
+function fetchNewMoviesNotification(page) {
   const today = new Date().toISOString().slice(0, 10);
-  const url = `${URL}/discover/movie?api_key=${key}&primary_release_date.gte=${today}&sort_by=primary_release_date.ascpage=1`;
+  const url = `${URL}/discover/movie?api_key=${key}&primary_release_date.gte=${today}&sort_by=primary_release_date.asc&page=${page}`;
 
   return axios.get(url).then(response => response.data.results);
 }
