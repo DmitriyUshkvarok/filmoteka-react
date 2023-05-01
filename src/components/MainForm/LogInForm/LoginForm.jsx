@@ -85,8 +85,10 @@ function LogInForm() {
         Register as a user of our film library and get access to a special
         library page where you can save your favorite movies to your favorites
         list and add new films to it. Create your own watchlists and enjoy
-        watching movies that are only available to our users. Register or log in
-        now and start enjoying the best movies!
+        watching movies that are only available to our users. Also, when you
+        register you will get notification functionality about the latest
+        expected movies!Register or log in now and start enjoying the best
+        movies!
       </FormPageDescription>
     </>
   );

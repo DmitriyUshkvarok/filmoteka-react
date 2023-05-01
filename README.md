@@ -1,113 +1,69 @@
-# React homework template
+Movie Collection App This is a simple web application for managing a movie
+collection. It allows users to register and login, add movies to their
+collection, and view their library.
 
-Этот проект был создан при помощи
-[Create React App](https://github.com/facebook/create-react-app). Для знакомства
-и настройки дополнительных возможностей
-[обратись к документации](https://facebook.github.io/create-react-app/docs/getting-started).
+Getting Started To use the application, you need to register an account on the
+server at https://connections-api.herokuapp.com/. Once you have an account, you
+can login to the app and start adding movies to your collection.
 
-## Создание репозитория по шаблону
+Adding Movies To add a movie to your collection, simply search for it by title,
+select the result you want, and click the "Add to Collection" button. You will
+receive a notification confirming that the movie has been added, and you will be
+automatically redirected to your library page.
 
-Используй этот репозиторий организации GoIT как шаблон для создания репозитория
-своего проекта. Для этого нажми на кнопку `«Use this template»` и выбери опцию
-`«Create a new repository»`, как показано на изображении.
+Viewing Your Library To view your library, click the "Library" link in the
+navigation bar. You will see a list of all the movies in your collection, along
+with their title, year of release, and poster image.
 
-![Creating repo from a template step 1](./assets/template-step-1.png)
+Technical Details The application is built using React.js for the front-end and
+communicates with the server at https://connections-api.herokuapp.com/ for user
+authentication and movie data. The app uses the TMDB API
+(https://www.themoviedb.org/documentation/api) to search for movies and retrieve
+their details. Notifications are implemented using the react-toastify library
+(https://fkhadra.github.io/react-toastify/).
 
-На следующем шаге откроется страница создания нового репозитория. Заполни поле
-его имени, убедись что репозиторий публичный, после чего нажми кнопку
-`«Create repository from template»`.
+Filmoteka App Filmotheque is an 11-page application with extensive functionality
+for movie enthusiasts. The main page has a fixed header with navigation, a
+registration or login form, a user bar, an animated logo, a theme toggle button,
+and a new movie notifications button. There is also a logout button available.
+Upon registration, users gain the ability to add movies to their favorites
+library and receive notifications about new movies.
 
-![Creating repo from a template step 2](./assets/template-step-2.png)
+The main page features a carousel of movies currently playing in theaters, a
+movie genre menu, and a collection of movie cards with infinite scroll. Clicking
+on a card opens a detailed movie page where users can watch the trailer, see
+actors who starred in the movie, view the rating, genre, description, and add
+the movie to their favorites library or leave a review.
 
-После того как репозиторий будет создан, необходимо перейти в настройки
-созданного репозитория на вкладку `Settings` > `Actions` > `General` как
-показано на изображении.
+On the movies page, there is a search form by movie title, a form to choose
+movies by year, as well as the ability to navigate to the top-rated movies page
+and the upcoming movies page.
 
-![Settings GitHub Actions permissions step 1](./assets/gh-actions-perm-1.png)
+On the actors page, there is digital pagination to navigate to the next page of
+actor lists, as well as a dynamic search form by letters to find actors.
+Clicking on an actor card takes the user to a page with information about the
+actor and a list of all the movies they have starred in. In the actor
+information section, there is a function to open and close text if there is a
+lot of it.
 
-Проскролив страницу до самого конца, в секции `«Workflow permissions»` выбери
-опцию `«Read and write permissions»` и поставь галочку в чекбоксе. Это
-необходимо для автоматизации процесса деплоя проекта.
+The app features smooth scrolling to the top of the page, a back button to
+return to the previous page, and a scroll-to-top button. Clicking on a movie
+image on the movie details page opens a high-quality trailer of the movie.
 
-![Settings GitHub Actions permissions step 2](./assets/gh-actions-perm-2.png)
+Movie ratings are dynamically implemented as stars or numbers wrapped in
+different colored wrappers depending on the height of the rating. Users can view
+and delete movies they've added to their library on the library page. The
+registration and login forms have character and type validation prompts, as well
+as a show/hide password function.
 
-Теперь у тебя есть личный репозиторий проекта, со структурой файлов и папок
-репозитория-шаблона. Далее работай с ним как с любым другим личным репозиторием,
-клонируй его себе на компьютер, пиши код, делай коммиты и отправляй их на
-GitHub.
+The libraries used in the app include:
 
-## Подготовка к работе
+axios debounce formik notiflix prop-types react-icons
+react-infinite-scroll-component react-loader-spinner react-paginate react-player
+react-redux react-router-dom react-scroll react-scroll-to-top react-select
+react-spinners
 
-1. Убедись что на компьютере установлена LTS-версия Node.js.
-   [Скачай и установи](https://nodejs.org/en/) её если необходимо.
-2. Установи базовые зависимости проекта командой `npm install`.
-3. Запусти режим разработки, выполнив команду `npm start`.
-4. Перейди в браузере по адресу [http://localhost:3000](http://localhost:3000).
-   Эта страница будет автоматически перезагружаться после сохранения изменений в
-   файлах проекта.
-
-## Деплой
-
-Продакшн версия проекта будет автоматически проходить линтинг, собираться и
-деплоиться на GitHub Pages, в ветку `gh-pages`, каждый раз когда обновляется
-ветка `main`. Например, после прямого пуша или принятого пул-реквеста. Для этого
-необходимо в файле `package.json` отредактировать поле `homepage`, заменив
-`your_username` и `your_repo_name` на свои, и отправить изменения на GitHub.
-
-```json
-"homepage": "https://your_username.github.io/your_repo_name/"
-```
-
-Далее необходимо зайти в настройки GitHub-репозитория (`Settings` > `Pages`) и
-выставить раздачу продакшн версии файлов из папки `/root` ветки `gh-pages`, если
-это небыло сделано автоматически.
-
-![GitHub Pages settings](./assets/repo-settings.png)
-
-### Статус деплоя
-
-Статус деплоя крайнего коммита отображается иконкой возле его идентификатора.
-
-- **Желтый цвет** - выполняется сборка и деплой проекта.
-- **Зеленый цвет** - деплой завершился успешно.
-- **Красный цвет** - во время линтинга, сборки или деплоя произошла ошибка.
-
-Более детальную информацию о статусе можно посмотреть кликнув по иконке, и в
-выпадающем окне перейти по ссылке `Details`.
-
-![Deployment status](./assets/deploy-status.png)
-
-### Живая страница
-
-Через какое-то время, обычно пару минут, живую страницу можно будет посмотреть
-по адресу указанному в отредактированном свойстве `homepage`. Например, вот
-ссылка на живую версию для этого репозитория
-[https://goitacademy.github.io/react-homework-template](https://goitacademy.github.io/react-homework-template).
-
-Если открывается пустая страница, убедись что во вкладке `Console` нет ошибок
-связанных с неправильными путями к CSS и JS файлам проекта (**404**). Скорее
-всего у тебя неправильное значение свойства `homepage` в файле `package.json`.
-
-### Маршрутизация
-
-Если приложение использует библиотеку `react-router-dom` для маршрутизации,
-необходимо дополнительно настроить компонент `<BrowserRouter>`, передав в пропе
-`basename` точное название твоего репозитория. Слеш в начале строки обязателен.
-
-```jsx
-<BrowserRouter basename="/your_repo_name">
-  <App />
-</BrowserRouter>
-```
-
-## Как это работает
-
-![How it works](./assets/how-it-works.png)
-
-1. После каждого пуша в ветку `main` GitHub-репозитория, запускается специальный
-   скрипт (GitHub Action) из файла `.github/workflows/deploy.yml`.
-2. Все файлы репозитория копируются на сервер, где проект инициализируется и
-   проходит линтинг и сборку перед деплоем.
-3. Если все шаги прошли успешно, собранная продакшн версия файлов проекта
-   отправляется в ветку `gh-pages`. В противном случае, в логе выполнения
-   скрипта будет указано в чем проблема.
+Issues and Contributing If you encounter any issues with the application or
+would like to contribute to its development, please open an issue or pull
+request on the GitHub repository
+(https://github.com/DmitriyUshkvarok/filmoteka-react).

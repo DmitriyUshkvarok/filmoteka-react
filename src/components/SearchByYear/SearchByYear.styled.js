@@ -6,7 +6,7 @@ export const CardsLoader = styled(FaReact)`
   display: flex;
   align-items: center;
   justify-content: center;
-  color: var(--color);
+  fill: var(--color);
   margin-left: auto;
   margin-right: auto;
   animation: rotate 5s infinite linear;

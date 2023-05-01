@@ -14,6 +14,7 @@ import {
   ExpectedInfoWrapper,
   ExpectedInfoContainer,
   StyledSwiperSlide,
+  SlideFlexWrapper,
   ImgExpectedWrapper,
   ExpectedImg,
   ExpectedTitle,
@@ -78,11 +79,11 @@ const ExpectedMoviesList = () => {
                     spaceBetween: 10,
                   },
                   1000: {
-                    slidesPerView: 5,
+                    slidesPerView: 4,
                     spaceBetween: 10,
                   },
                   1200: {
-                    slidesPerView: 6,
+                    slidesPerView: 5,
                     spaceBetween: 10,
                   },
                 }}
@@ -102,31 +103,36 @@ const ExpectedMoviesList = () => {
                     const ratingClassName = `rating-${ratingColor}`;
                     return (
                       <StyledSwiperSlide key={id}>
-                        <ImgExpectedWrapper>
-                          <Link to={`/movies/${id}`} state={{ from: location }}>
-                            <ExpectedImg
-                              src={
-                                poster_path
-                                  ? `https://image.tmdb.org/t/p/w500/${poster_path}`
-                                  : 'https://via.placeholder.com/300x400'
-                              }
-                              alt={title}
-                            />
-                          </Link>
-                        </ImgExpectedWrapper>
-                        <ExpectedInfoContainer>
-                          <ExpectedTitle>
-                            {title ? title : 'Movie without a title'}
-                          </ExpectedTitle>
-                          <ExpectedInfoWrapper>
-                            <ExpextedRating className={ratingClassName}>
-                              {vote_average ? vote_average.toFixed(1) : 'N/A'}
-                            </ExpextedRating>
-                            <ExpextedYear>
-                              {release_date.slice(0, 4)}
-                            </ExpextedYear>
-                          </ExpectedInfoWrapper>
-                        </ExpectedInfoContainer>
+                        <SlideFlexWrapper>
+                          <ImgExpectedWrapper>
+                            <Link
+                              to={`/movies/${id}`}
+                              state={{ from: location }}
+                            >
+                              <ExpectedImg
+                                src={
+                                  poster_path
+                                    ? `https://image.tmdb.org/t/p/w500/${poster_path}`
+                                    : 'https://via.placeholder.com/300x400'
+                                }
+                                alt={title}
+                              />
+                            </Link>
+                          </ImgExpectedWrapper>
+                          <ExpectedInfoContainer>
+                            <ExpectedTitle>
+                              {title ? title : 'Movie without a title'}
+                            </ExpectedTitle>
+                            <ExpectedInfoWrapper>
+                              <ExpextedRating className={ratingClassName}>
+                                {vote_average ? vote_average.toFixed(1) : 'N/A'}
+                              </ExpextedRating>
+                              <ExpextedYear>
+                                {release_date.slice(0, 4)}
+                              </ExpextedYear>
+                            </ExpectedInfoWrapper>
+                          </ExpectedInfoContainer>
+                        </SlideFlexWrapper>
                       </StyledSwiperSlide>
                     );
                   }

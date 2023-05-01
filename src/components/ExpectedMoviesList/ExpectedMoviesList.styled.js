@@ -9,6 +9,7 @@ export const CardsLoader = styled(FaReact)`
   justify-content: center;
   margin-left: auto;
   margin-right: auto;
+  fill: var(--color);
   animation: rotate 5s infinite linear;
   -webkit-animation: rotate 5s infinite linear;
   @keyframes rotate {
@@ -70,13 +71,8 @@ export const NavigationButton = styled.div`
 `;
 
 export const StyledSwiperSlide = styled(SwiperSlide)`
-  width: 100%;
-  height: 100%;
-  min-height: 330px;
+  height: 390px;
   background: var(--background-movies-item);
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
   padding: 5px;
   font-size: 14px;
   color: var(--color);
@@ -85,12 +81,19 @@ export const StyledSwiperSlide = styled(SwiperSlide)`
   box-sizing: border-box;
 `;
 
+export const SlideFlexWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 390px;
+`;
+
 export const ImgExpectedWrapper = styled.div`
   overflow: hidden;
 `;
 
 export const ExpectedImg = styled.img`
-  max-width: 100%;
+  width: 100%;
   object-fit: cover;
   transition: transform 0.4s;
   -webkit-transition: transform 0.4s;

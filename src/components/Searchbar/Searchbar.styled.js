@@ -24,6 +24,8 @@ export const InputSearch = styled.input`
   background-color: transparent;
   border: 1px solid gray;
   outline: none;
+  color: var(--color);
+  font-size: 18px;
   border-radius: 5px;
   -webkit-border-radius: 5px;
   -moz-border-radius: 5px;
