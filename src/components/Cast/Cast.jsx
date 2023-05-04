@@ -2,7 +2,7 @@ import { useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import apiTheMovieDB from 'service/kino-api';
 import { Link } from 'react-router-dom';
-import { CastList, CastItem, CastName } from './Cast.styled';
+import { CastList, CastItem, CastName, CardsLoader } from './Cast.styled';
 
 function CastMovie() {
   const { movieId } = useParams();
@@ -25,7 +25,7 @@ function CastMovie() {
   }, [movieId]);
 
   if (isLoading) {
-    return <p>Loading...</p>;
+    return <CardsLoader size={50} />;
   }
 
   if (error) {

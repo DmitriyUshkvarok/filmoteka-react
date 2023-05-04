@@ -2,13 +2,7 @@ import { GiReturnArrow } from 'react-icons/gi';
 import css from './MovieDetalis.module.css';
 import { toast } from 'react-toastify';
 import Container from 'components/Container/Container';
-import {
-  useParams,
-  useLocation,
-  Link,
-  Outlet,
-  useNavigate,
-} from 'react-router-dom';
+import { useParams, useLocation, Link, Outlet } from 'react-router-dom';
 import { useState, useEffect, Suspense } from 'react';
 import apiTheMovieDB from 'service/kino-api';
 import posterimg from '../../images/poster.jpeg';
@@ -48,14 +42,7 @@ function MovieDetalis() {
   const location = useLocation();
   const backLink = location.state?.from ?? '/';
 
-  const navigate = useNavigate();
-
   const isLoggedIn = useSelector(authSelector.getIsLoggedIn);
-
-  // eslint-disable-next-line no-unused-vars
-  const handleGoBack = () => {
-    navigate('/movie/actors/');
-  };
 
   function handleFetchTrailer() {
     apiTheMovieDB.fetchTrailerMovies(movieId).then(videos => {

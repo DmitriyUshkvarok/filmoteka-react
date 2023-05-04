@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import apiTheMovieDB from 'service/kino-api';
 import { useParams } from 'react-router-dom';
 import {
+  CardsLoader,
   InfoActorContainer,
   ActorInfoMain,
   ActorsDetalis,
@@ -51,7 +52,7 @@ const ActorsInfo = () => {
   return (
     <Container>
       {loading ? (
-        <p>Loading...</p>
+        <CardsLoader />
       ) : (
         <div>
           {actorsInfo && (

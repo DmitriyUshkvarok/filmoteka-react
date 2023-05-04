@@ -2,6 +2,7 @@ import { useState, useEffect, Suspense } from 'react';
 import apiTheMovieDB from 'service/kino-api';
 import ButtonBack from 'components/ButtonBack/ButtonBack';
 import {
+  CardsLoader,
   BtnBackWrapper,
   ActorsMoviesTitle,
   ActorsMoreInfo,
@@ -67,7 +68,7 @@ const ActorsMoviePage = () => {
           <Outlet />
         </Suspense>
         {loading ? (
-          <p>Loading...</p>
+          <CardsLoader size={50} />
         ) : (
           <>
             <MoviesList movies={movies} />

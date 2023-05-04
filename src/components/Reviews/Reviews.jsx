@@ -31,7 +31,7 @@ function Review() {
   }, [movieId]);
 
   if (isLoading) {
-    return <CardsLoader />;
+    return <CardsLoader size={30} />;
   }
 
   if (error) {
