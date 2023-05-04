@@ -3,18 +3,21 @@ import ScrollToTop from 'react-scroll-to-top';
 import { FaReact } from 'react-icons/fa';
 
 export const LoaderWraper = styled.div`
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
   background: var(--background-body);
-`;
-
-export const MainLoader = styled(FaReact)`
-  height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-left: auto;
-  margin-right: auto;
+`;
+
+export const MainLoader = styled(FaReact)`
   animation: rotate 5s infinite linear;
   -webkit-animation: rotate 5s infinite linear;
+
   @keyframes rotate {
     from {
       transform: rotate(0deg);

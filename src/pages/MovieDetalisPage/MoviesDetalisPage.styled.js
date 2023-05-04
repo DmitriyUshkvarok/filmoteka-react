@@ -5,6 +5,12 @@ export const DetailsWrapper = styled.div`
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
+  margin-bottom: 70px;
+
+  @media screen and (max-width: 700px) {
+    flex-direction: column;
+    align-items: center;
+  }
 `;
 
 export const ColumnInfo = styled.div`
@@ -16,12 +22,11 @@ export const PosterMovie = styled.img`
   position: absolute;
   width: 100%;
   height: auto;
-  top: -1%;
+  top: 10%;
   right: -50%;
   z-index: -1;
   transform: translate(-50%, 0);
   opacity: 0.1;
-  /* border: 10px solid var(--color); */
   border-radius: 10px;
   -webkit-border-radius: 10px;
   -moz-border-radius: 10px;
@@ -31,6 +36,18 @@ export const PosterMovie = styled.img`
   -moz-transform: translate(-50%, 0);
   -ms-transform: translate(-50%, 0);
   -o-transform: translate(-50%, 0);
+
+  @media screen and (max-width: 1000px) {
+    top: 15%;
+  }
+
+  @media screen and (max-width: 768px) {
+    top: 16%;
+  }
+
+  @media screen and (max-width: 500px) {
+    top: 20%;
+  }
 `;
 
 export const BtnBackDetailsWrapper = styled.div`
@@ -75,12 +92,24 @@ export const InfoTitle = styled.h1`
   @media screen and (max-width: 768px) {
     font-size: 27px;
   }
+
+  @media screen and (max-width: 480px) {
+    font-size: 25px;
+    text-align: center;
+    margin-top: 20px;
+  }
 `;
 
 export const ScoreDetails = styled.p`
   font-size: 20px;
   color: gold;
   margin-bottom: 10px;
+
+  @media screen and (max-width: 480px) {
+    font-size: 25px;
+    text-align: center;
+    margin-top: 20px;
+  }
 `;
 
 export const OverviewTitle = styled.h2`
@@ -90,6 +119,12 @@ export const OverviewTitle = styled.h2`
 
   @media screen and (max-width: 768px) {
     font-size: 27px;
+  }
+
+  @media screen and (max-width: 480px) {
+    font-size: 25px;
+    text-align: center;
+    margin-top: 20px;
   }
 `;
 
@@ -155,6 +190,10 @@ export const ColumnImg = styled.div`
 
   &:hover .detalisImg {
     transform: scale(1.1);
+  }
+
+  @media screen and (max-width: 700px) {
+    order: -1;
   }
 `;
 

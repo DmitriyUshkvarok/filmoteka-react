@@ -4,7 +4,7 @@ import apiTheMovieDB from 'service/kino-api';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import MoviesList from 'components/MoviesList/MoviesList';
 import { toast } from 'react-toastify';
-import css from './GenrePage.module.css';
+import { GenreListMoviesContainer, GenreTitle } from './GenrePage.styled.js';
 
 function GenrePage() {
   const { id } = useParams();
@@ -37,8 +37,8 @@ function GenrePage() {
   }, [fetchMovies, currentPage]);
 
   return (
-    <div className={css.genreListMoviesContainer}>
-      <h2 className={css.genreTitle}>Movies by genre</h2>
+    <GenreListMoviesContainer>
+      <GenreTitle>Movies by genre</GenreTitle>
       <InfiniteScroll
         dataLength={movies.length}
         next={() => setCurrentPage(currentPage + 1)}
@@ -47,7 +47,7 @@ function GenrePage() {
       >
         <MoviesList movies={movies} />
       </InfiniteScroll>
-    </div>
+    </GenreListMoviesContainer>
   );
 }
 

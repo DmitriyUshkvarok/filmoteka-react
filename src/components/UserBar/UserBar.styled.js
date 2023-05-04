@@ -5,12 +5,20 @@ export const Wrapper = styled.div`
   align-items: center;
   justify-content: space-between;
   gap: 10px;
+
+  @media screen and (max-width: 410px) {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
 `;
 
 export const WelcomeMessage = styled.p`
   font-size: 14px;
   color: var(--border-color);
-  /* text-transform: uppercase; */
+
+  @media screen and (max-width: 410px) {
+    font-size: 10px;
+  }
 `;
 
 export const Email = styled.p`

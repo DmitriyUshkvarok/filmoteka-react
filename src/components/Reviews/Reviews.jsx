@@ -1,7 +1,14 @@
 import { useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import apiTheMovieDB from 'service/kino-api';
-import { Author, Content } from './Reviews.styled';
+import {
+  Author,
+  Content,
+  ReviewList,
+  ReviewListItem,
+  InfoDiscription,
+  CardsLoader,
+} from './Reviews.styled';
 import Container from 'components/Container/Container';
 
 function Review() {
@@ -24,7 +31,7 @@ function Review() {
   }, [movieId]);
 
   if (isLoading) {
-    return <p>Loading...</p>;
+    return <CardsLoader />;
   }
 
   if (error) {
@@ -34,19 +41,19 @@ function Review() {
   return (
     <>
       <Container>
-        <div className="css.reviewList">
+        <ReviewList>
           {reviews && reviews.length > 0 ? (
             reviews.map(({ author, content, id }) => (
-              <div className="css.reviewListItem" key={id}>
+              <ReviewListItem key={id}>
                 <Author>Author: {author}</Author>
 
                 <Content>Content:{content}</Content>
-              </div>
+              </ReviewListItem>
             ))
           ) : (
-            <p>No review members found</p>
+            <InfoDiscription>No review members found</InfoDiscription>
           )}
-        </div>
+        </ReviewList>
       </Container>
     </>
   );

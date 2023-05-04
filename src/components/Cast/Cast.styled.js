@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 export const CastList = styled.ul`
   margin-top: 20px;
-  margin-bottom: 50px;
+  margin-bottom: 90px;
   display: flex;
   justify-content: center;
   flex-wrap: wrap;

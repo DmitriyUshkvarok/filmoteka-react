@@ -14,6 +14,7 @@ import apiTheMovieDB from 'service/kino-api';
 import posterimg from '../../images/poster.jpeg';
 import YouTube from 'react-youtube';
 import ButtonBack from 'components/ButtonBack/ButtonBack';
+import Footer from 'components/Footer/Footer';
 import authSelector from 'redux/auth/auth-selector';
 import {
   DetailsWrapper,
@@ -33,6 +34,7 @@ import {
   AuthBtnText,
 } from './MoviesDetalisPage.styled';
 import { useSelector } from 'react-redux';
+import { animateScroll as scroll } from 'react-scroll';
 
 function MovieDetalis() {
   const [movie, setMovie] = useState([]);
@@ -40,6 +42,7 @@ function MovieDetalis() {
   const [isFavorite, setIsFavorite] = useState(false);
   const [trailerId, setTrailerId] = useState(null);
   const [urlModal, setUrlModal] = useState(false);
+  const [isClicked, setIsClicked] = useState(false);
 
   const { movieId } = useParams();
   const location = useLocation();
@@ -137,6 +140,17 @@ function MovieDetalis() {
     }
   };
 
+  const henndleCastAndReviewSmooth = () => {
+    if (!isClicked) {
+      scroll.scrollToBottom({
+        duration: 2000,
+        smooth: 'easeInOutQuad',
+        offset: 0.2,
+      });
+      setIsClicked(true);
+    }
+  };
+
   return (
     <>
       {movie && (
@@ -175,7 +189,12 @@ function MovieDetalis() {
                 </GenreListDetails>
                 <ReviewList>
                   <li className={css.reviewiLstItem}>
-                    <Link to="cast" state={location.state} className={css.cast}>
+                    <Link
+                      to="cast"
+                      state={location.state}
+                      className={css.cast}
+                      onClick={henndleCastAndReviewSmooth}
+                    >
                       Cast
                     </Link>
                   </li>
@@ -185,6 +204,7 @@ function MovieDetalis() {
                       to="review"
                       state={location.state}
                       className={css.review}
+                      onClick={henndleCastAndReviewSmooth}
                     >
                       Rewiew
                     </Link>
@@ -253,6 +273,7 @@ function MovieDetalis() {
               <Outlet />
             </Suspense>
           </Container>
+          <Footer />
         </section>
       )}
     </>

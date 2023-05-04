@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { createAsyncThunk } from '@reduxjs/toolkit';
+import { toast } from 'react-toastify';
 
 axios.defaults.baseURL = 'https://connections-api.herokuapp.com';
 
@@ -17,7 +18,11 @@ const register = createAsyncThunk('auth/register', async credentials => {
     setAuth(data.token);
     return data;
   } catch (error) {
-    console.log(error);
+    if (error.response && error.response.status === 400) {
+      toast.error(
+        'Invalid email, name, or password( the password must be at least 10 characters long ! the username must be at least 4 characters long ! the email address must be valid ! try to enter your working email address, for example your google account address, and try again'
+      );
+    }
   }
 });
 
@@ -27,7 +32,11 @@ const logIn = createAsyncThunk('auth/login', async credentials => {
     setAuth(data.token);
     return data;
   } catch (error) {
-    console.log(error);
+    if (error.response && error.response.status === 400) {
+      toast.error(
+        'Invalid email, name, or password( the password must be at least 10 characters long ! the username must be at least 4 characters long ! the email address must be valid ! try to enter your working email address, for example your google account address, and try again'
+      );
+    }
   }
 });
 
