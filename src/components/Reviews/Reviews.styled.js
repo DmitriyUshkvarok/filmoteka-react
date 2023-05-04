@@ -29,7 +29,7 @@ export const StyleFaTrashAlt = styled(FaTrashAlt)`
 
 export const ReviewAndCommentWrapper = styled.div`
   display: flex;
-  gap: 50px;
+  gap: 20px;
   justify-content: space-between;
 `;
 
@@ -41,9 +41,21 @@ export const ReviewList = styled.ul`
 export const ReviewListItem = styled.li``;
 
 export const Author = styled.p`
-  margin-bottom: 50px;
+  margin-bottom: 20px;
   font-size: 30px;
   color: var(--border-color);
+
+  @media screen and (max-width: 660px) {
+    font-size: 20px;
+
+    @media screen and (max-width: 555px) {
+      font-size: 15px;
+    }
+
+    @media screen and (max-width: 490px) {
+      font-size: 11px;
+    }
+  }
 `;
 
 export const Content = styled.p`
@@ -51,6 +63,22 @@ export const Content = styled.p`
   color: var(--color);
   margin-bottom: 30px;
   text-align: justify;
+
+  @media screen and (max-width: 660px) {
+    font-size: 20px;
+
+    @media screen and (max-width: 555px) {
+      font-size: 15px;
+    }
+
+    @media screen and (max-width: 490px) {
+      font-size: 11px;
+    }
+
+    @media screen and (max-width: 370px) {
+      font-size: 7px;
+    }
+  }
 `;
 
 export const InfoDiscription = styled.p`
@@ -84,21 +112,65 @@ export const AuthorWrapper = styled.div`
   border: 1px solid var(--border-color);
   border-radius: 10px;
   padding: 10px;
+
+  @media screen and (max-width: 430px) {
+    flex-direction: column;
+  }
 `;
 
 export const CommentAuthorName = styled.p`
   font-size: 30px;
   color: var(--color);
+
+  @media screen and (max-width: 660px) {
+    font-size: 20px;
+
+    @media screen and (max-width: 555px) {
+      font-size: 15px;
+    }
+
+    @media screen and (max-width: 490px) {
+      font-size: 11px;
+    }
+  }
 `;
 
 export const SpanAuthor = styled.span`
   display: flex;
   font-size: 30px;
   color: var(--border-color);
+
+  @media screen and (max-width: 660px) {
+    font-size: 20px;
+  }
+
+  @media screen and (max-width: 555px) {
+    font-size: 15px;
+  }
+
+  @media screen and (max-width: 490px) {
+    font-size: 11px;
+  }
 `;
 
 export const CommentAuthorText = styled.p`
   color: var(--color);
   margin-bottom: 30px;
-  text-align: justify;
+  text-align: center;
+
+  @media screen and (max-width: 660px) {
+    font-size: 20px;
+  }
+
+  @media screen and (max-width: 555px) {
+    font-size: 15px;
+  }
+
+  @media screen and (max-width: 490px) {
+    font-size: 11px;
+  }
+
+  @media screen and (max-width: 370px) {
+    font-size: 7px;
+  }
 `;

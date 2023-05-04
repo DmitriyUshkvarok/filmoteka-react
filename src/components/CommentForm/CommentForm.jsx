@@ -34,7 +34,7 @@ const CommentForm = ({ onSubmit }) => {
         <StyleLabel htmlFor="textarea"> Message:</StyleLabel>
         <Textarea
           id="textarea"
-          maxLength={100}
+          maxLength={500}
           value={number}
           onChange={e => setNumber(e.target.value)}
         />

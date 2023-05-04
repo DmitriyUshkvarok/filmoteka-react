@@ -82,13 +82,13 @@ function LogInForm() {
         </FormLogin>
       </FormikStyle>
       <FormPageDescription>
-        Register as a user of our film library and get access to a special
+        Register as a user of our movie library and get access to a special
         library page where you can save your favorite movies to your favorites
-        list and add new films to it. Create your own watchlists and enjoy
-        watching movies that are only available to our users. Also, when you
-        register you will get notification functionality about the latest
-        expected movies!Register or log in now and start enjoying the best
-        movies!
+        list and add new movies to it. Create your own watchlists and enjoy
+        watching movies that are only available to our users. Additionally, as a
+        registered user you will be notified of the latest movies and have the
+        ability to comment on all movies and view reviews from multiple users.
+        Sign up or log in now and start enjoying the best movies!
       </FormPageDescription>
     </>
   );

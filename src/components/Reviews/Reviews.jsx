@@ -121,7 +121,7 @@ function Review() {
                   <SpanAuthor>Author:</SpanAuthor>
                   <CommentAuthorName>{comment.name}</CommentAuthorName>
                 </AuthorWrapper>
-                <CommentAuthorText>Content:{comment.number}</CommentAuthorText>
+                <CommentAuthorText>{comment.number}</CommentAuthorText>
               </CommentFormItem>
             ))}
           </CommentFormList>

@@ -187,14 +187,16 @@ function MovieDetalis() {
                   </li>
 
                   <li className={css.reviewiLstItem}>
-                    <Link
-                      to="review"
-                      state={location.state}
-                      className={css.review}
-                      onClick={henndleCastAndReviewSmooth}
-                    >
-                      Rewiew
-                    </Link>
+                    {isLoggedIn && (
+                      <Link
+                        to="review"
+                        state={location.state}
+                        className={css.review}
+                        onClick={henndleCastAndReviewSmooth}
+                      >
+                        Rewiew
+                      </Link>
+                    )}
                   </li>
                   <li className={css.reviewiLstItem}>
                     <Link to={'/library'} onClick={toggleFavorites}>
