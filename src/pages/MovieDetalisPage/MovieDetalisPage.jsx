@@ -3,7 +3,7 @@ import css from './MovieDetalis.module.css';
 import { toast } from 'react-toastify';
 import Container from 'components/Container/Container';
 import { useParams, useLocation, Link, Outlet } from 'react-router-dom';
-import { useState, useEffect, Suspense } from 'react';
+import { useState, useEffect, Suspense, useContext } from 'react';
 import apiTheMovieDB from 'service/kino-api';
 import posterimg from '../../images/poster.jpeg';
 import YouTube from 'react-youtube';
@@ -29,6 +29,7 @@ import {
 } from './MoviesDetalisPage.styled';
 import { useSelector } from 'react-redux';
 import { animateScroll as scroll } from 'react-scroll';
+import { LanguageContext } from 'components/context/languageContext';
 
 function MovieDetalis() {
   const [movie, setMovie] = useState([]);
@@ -37,6 +38,7 @@ function MovieDetalis() {
   const [trailerId, setTrailerId] = useState(null);
   const [urlModal, setUrlModal] = useState(false);
   const [isClicked, setIsClicked] = useState(false);
+  const { selectedLanguage } = useContext(LanguageContext);
 
   const { movieId } = useParams();
   const location = useLocation();
@@ -45,17 +47,19 @@ function MovieDetalis() {
   const isLoggedIn = useSelector(authSelector.getIsLoggedIn);
 
   function handleFetchTrailer() {
-    apiTheMovieDB.fetchTrailerMovies(movieId).then(videos => {
-      const trailer = videos.find(video => video.type === 'Trailer');
-      if (trailer) {
-        setTrailerId(trailer.key);
-        setUrlModal(true);
-        document.body.style.overflow = 'hidden';
-      } else {
-        setUrlModal(false);
-        toast.error('No trailer available for this movie.');
-      }
-    });
+    apiTheMovieDB
+      .fetchTrailerMovies(movieId, selectedLanguage.iso_639_1)
+      .then(videos => {
+        const trailer = videos.find(video => video.type === 'Trailer');
+        if (trailer) {
+          setTrailerId(trailer.key);
+          setUrlModal(true);
+          document.body.style.overflow = 'hidden';
+        } else {
+          setUrlModal(false);
+          toast.error('No trailer available for this movie.');
+        }
+      });
   }
 
   useEffect(() => {
@@ -94,12 +98,12 @@ function MovieDetalis() {
 
   useEffect(() => {
     apiTheMovieDB
-      .fetchMovieDetalis(movieId)
+      .fetchMovieDetalis(movieId, selectedLanguage.iso_639_1)
       .then(data => {
         setMovie(data);
       })
       .catch('error');
-  }, [movieId]);
+  }, [movieId, selectedLanguage]);
 
   useEffect(() => {
     window.addEventListener('keydown', clickKeyDown);

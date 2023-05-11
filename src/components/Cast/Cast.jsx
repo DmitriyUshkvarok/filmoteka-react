@@ -1,19 +1,21 @@
 import { useParams } from 'react-router-dom';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useContext } from 'react';
 import apiTheMovieDB from 'service/kino-api';
 import { Link } from 'react-router-dom';
 import { CastList, CastItem, CastName, CardsLoader } from './Cast.styled';
+import { LanguageContext } from 'components/context/languageContext';
 
 function CastMovie() {
   const { movieId } = useParams();
   const [cast, setCast] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
+  const { selectedLanguage } = useContext(LanguageContext);
 
   useEffect(() => {
     setIsLoading(true);
     apiTheMovieDB
-      .fetchMovieCredits(movieId)
+      .fetchMovieCredits(movieId, selectedLanguage.iso_639_1)
       .then(data => {
         setCast(data.cast);
         setIsLoading(false);
@@ -22,7 +24,7 @@ function CastMovie() {
         setError(error);
         setIsLoading(false);
       });
-  }, [movieId]);
+  }, [movieId, selectedLanguage]);
 
   if (isLoading) {
     return <CardsLoader size={50} />;
@@ -43,7 +45,7 @@ function CastMovie() {
                   src={
                     profile_path
                       ? `https://image.tmdb.org/t/p/w500/${profile_path}`
-                      : 'https://via.placeholder.com/200x300'
+                      : 'https://dummyimage.com/200x300/fff/aaa'
                   }
                   alt={name}
                   width={200}

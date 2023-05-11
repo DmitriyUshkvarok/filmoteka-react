@@ -9,6 +9,7 @@ import { useSelector } from 'react-redux';
 import authSelector from 'redux/auth/auth-selector';
 import UserBar from 'components/UserBar/UserBar';
 import BellNotification from 'components/BellNotification/BellNotification';
+import LanguageSelection from 'components/LanguageSelection/LanguageSelection';
 
 function Header() {
   const isLoggedIn = useSelector(authSelector.getIsLoggedIn);
@@ -17,7 +18,10 @@ function Header() {
     <header className={css.header}>
       <Container>
         <div className={css.navigationWrapper}>
-          <ThemeSwitcher />
+          <div className={css.WrapperLangAndTheme}>
+            <ThemeSwitcher />
+            <LanguageSelection />
+          </div>
           <div className={css.navContainer}>
             <Navigation />
             {isLoggedIn ? <UserBar /> : <AuthNav />}

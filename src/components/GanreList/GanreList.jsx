@@ -10,7 +10,7 @@ function GenreList({ genres }) {
       {genres.map(({ id, name }) => (
         <Link to={`genre/${id}`} state={{ from: location }} key={id}>
           <li className={css.ganreListItem}>
-            <p>{name}</p>
+            <p>{name || 'Unknown'}</p>
           </li>
         </Link>
       ))}

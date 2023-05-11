@@ -9,9 +9,10 @@ import {
 } from './ExpectedMoviePage.styled';
 import css from '../ActorsPage/ActorsPage.module.css';
 import { toast } from 'react-toastify';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import ReactPaginate from 'react-paginate';
 import { Link, useLocation } from 'react-router-dom';
+import { LanguageContext } from 'components/context/languageContext';
 
 const ExpectedMoviePage = () => {
   const [movies, setMovie] = useState([]);
@@ -21,10 +22,11 @@ const ExpectedMoviePage = () => {
   const [totalPages, setTotalPages] = useState(0);
   const location = useLocation();
   const backLink = location.state?.from ?? '/';
+  const { selectedLanguage } = useContext(LanguageContext);
 
   useEffect(() => {
     apiTheMovieDB
-      .fetchWaitingForTheMovies(currentPage)
+      .fetchWaitingForTheMovies(currentPage, selectedLanguage.iso_639_1)
       .then(({ results, total_pages }) => {
         setMovie(results);
         setTotalPages(Math.min(total_pages, 500));
@@ -36,7 +38,7 @@ const ExpectedMoviePage = () => {
         setError(error);
       })
       .finally(() => setLoading(false));
-  }, [currentPage]);
+  }, [currentPage, selectedLanguage.iso_639_1]);
 
   if (error) {
     return <p>{error.message}</p>;

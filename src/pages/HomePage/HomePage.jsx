@@ -1,12 +1,13 @@
 import css from './HomePage.module.css';
 import Container from 'components/Container/Container';
 import MoviesList from 'components/MoviesList/MoviesList';
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback, useContext } from 'react';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import apiTheMovieDB from 'service/kino-api';
 import { toast } from 'react-toastify';
 import GenreList from 'components/GanreList/GanreList';
 import ExpectedMoviesList from 'components/ExpectedMoviesList/ExpectedMoviesList';
+import { LanguageContext } from 'components/context/languageContext';
 
 function HomePage() {
   const [movies, setMovies] = useState([]);
@@ -14,25 +15,29 @@ function HomePage() {
   const [isFetching, setIsFetching] = useState(false);
   const [genres, setGenres] = useState([]);
   const [mounted, setMounted] = useState(false);
+  const { selectedLanguage } = useContext(LanguageContext);
 
-  const fetchMovies = useCallback(page => {
-    setIsFetching(true);
+  const fetchMovies = useCallback(
+    page => {
+      setIsFetching(true);
 
-    apiTheMovieDB
-      .fetchTrending(page)
-      .then(newMovies => {
-        setIsFetching(false);
-        if (newMovies.length === 0) {
-          toast.error("sorry, that's all the movies we could find");
-        }
+      apiTheMovieDB
+        .fetchTrending(page, selectedLanguage.iso_639_1)
+        .then(newMovies => {
+          setIsFetching(false);
+          if (newMovies.length === 0) {
+            toast.error("sorry, that's all the movies we could find");
+          }
 
-        setMovies(prevMovies => [...prevMovies, ...newMovies]);
-        setCurrentPage(page);
-      })
-      .catch(error => {
-        setIsFetching(false);
-      });
-  }, []);
+          setMovies(prevMovies => [...prevMovies, ...newMovies]);
+          setCurrentPage(page);
+        })
+        .catch(error => {
+          setIsFetching(false);
+        });
+    },
+    [selectedLanguage.iso_639_1]
+  );
 
   useEffect(() => {
     setMounted(true);
@@ -41,18 +46,24 @@ function HomePage() {
 
   useEffect(() => {
     if (mounted && movies.length === 0) {
-      fetchMovies(currentPage);
+      fetchMovies(currentPage, selectedLanguage.iso_639_1);
     }
-  }, [currentPage, fetchMovies, movies.length, mounted]);
+  }, [
+    currentPage,
+    fetchMovies,
+    movies.length,
+    mounted,
+    selectedLanguage.iso_639_1,
+  ]);
 
   useEffect(() => {
     apiTheMovieDB
-      .fetchAllgenres()
+      .fetchAllgenres(selectedLanguage.iso_639_1)
       .then(data => {
         setGenres(data);
       })
       .catch('error');
-  }, []);
+  }, [selectedLanguage.iso_639_1]);
 
   return (
     <Container>

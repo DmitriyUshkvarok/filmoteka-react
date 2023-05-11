@@ -1,7 +1,7 @@
 import Container from 'components/Container/Container';
 import apiTheMovieDB from 'service/kino-api';
 import { toast } from 'react-toastify';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Swiper } from 'swiper/react';
 import { Navigation, Scrollbar } from 'swiper';
@@ -23,16 +23,18 @@ import {
   StyledAiFillFastForward,
   StyledAiFillFastBackward,
 } from './ExpectedMoviesList.styled';
+import { LanguageContext } from 'components/context/languageContext';
 
 const ExpectedMoviesList = () => {
   const [movies, setMovies] = useState([]);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
   const location = useLocation();
+  const { selectedLanguage } = useContext(LanguageContext);
 
   useEffect(() => {
     apiTheMovieDB
-      .fetchExpectedMovies()
+      .fetchExpectedMovies(selectedLanguage.iso_639_1)
       .then(newMovies => {
         setMovies(newMovies);
       })
@@ -41,7 +43,7 @@ const ExpectedMoviesList = () => {
         toast.error('sorry, hernya kakasja');
       })
       .finally(setLoading(false));
-  }, []);
+  }, [selectedLanguage]);
 
   if (error) {
     return <p>{error.message}</p>;

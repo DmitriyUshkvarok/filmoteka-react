@@ -96,6 +96,9 @@ export const CommentFormList = styled.ul`
   width: 50%;
   display: flex;
   flex-direction: column;
+  /* overflow-y: auto;
+  max-height: 500px; */
+  margin-bottom: 170px;
 `;
 
 export const CommentFormItem = styled.li`
@@ -173,4 +176,10 @@ export const CommentAuthorText = styled.p`
   @media screen and (max-width: 370px) {
     font-size: 7px;
   }
+`;
+
+export const DateInfo = styled.small`
+  color: gray;
+  opacity: 0.7;
+  font-size: 12px;
 `;

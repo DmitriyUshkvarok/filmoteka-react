@@ -9,9 +9,10 @@ import {
 import { Link, useLocation } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import apiTheMovieDB from '../../service/kino-api';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import ReactPaginate from 'react-paginate';
 import ButtonBack from 'components/ButtonBack/ButtonBack';
+import { LanguageContext } from 'components/context/languageContext';
 
 const TopRatedPage = () => {
   const [movies, setMovies] = useState([]);
@@ -21,10 +22,11 @@ const TopRatedPage = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const location = useLocation();
   const backLink = location.state?.from ?? '/';
+  const { selectedLanguage } = useContext(LanguageContext);
 
   useEffect(() => {
     apiTheMovieDB
-      .fetchFilmsByRating(currentPage)
+      .fetchFilmsByRating(currentPage, selectedLanguage.iso_639_1)
       .then(({ results, total_pages }) => {
         setMovies(results);
         setTotalPages(Math.min(total_pages, 500));
@@ -37,7 +39,7 @@ const TopRatedPage = () => {
         setError(error);
       })
       .finally(() => setLoading(false));
-  }, [currentPage]);
+  }, [currentPage, selectedLanguage]);
 
   if (error) {
     return <p>{error.message}</p>;

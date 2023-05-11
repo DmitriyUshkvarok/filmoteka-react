@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import {
   CardsLoader,
   Search,
@@ -17,6 +17,7 @@ import ReactPaginate from 'react-paginate';
 import { useLocation, Link } from 'react-router-dom';
 import ButtonBack from 'components/ButtonBack/ButtonBack';
 import { animateScroll as scroll } from 'react-scroll';
+import { LanguageContext } from 'components/context/languageContext';
 
 function ActorsPage() {
   const [actors, setActors] = useState([]);
@@ -26,6 +27,7 @@ function ActorsPage() {
   const [totalPages, setTotalPages] = useState(0);
   const [searchQuery, setSearchQuery] = useState('');
   const [filteredActors, setFilteredActors] = useState([]);
+  const { selectedLanguage } = useContext(LanguageContext);
 
   const location = useLocation();
   const backLink = location.state?.from ?? '/';
@@ -35,7 +37,8 @@ function ActorsPage() {
       try {
         const { results, total_pages } = await apiTheMovieDB.fetchActors(
           page,
-          searchQuery
+          searchQuery,
+          selectedLanguage.iso_639_1
         );
         if (results.length === 0) {
           toast.error("sorry, that's all the actors we could find");
@@ -49,7 +52,7 @@ function ActorsPage() {
       }
     };
     fetchActors(currentPage, searchQuery);
-  }, [currentPage, searchQuery]);
+  }, [currentPage, searchQuery, selectedLanguage]);
 
   useEffect(() => {
     const filtered = actors.filter(actor =>
@@ -105,7 +108,7 @@ function ActorsPage() {
                       src={
                         profile_path
                           ? `https://image.tmdb.org/t/p/w500/${profile_path}`
-                          : 'https://via.placeholder.com/200x300'
+                          : 'https://dummyimage.com/200x300/fff/aaa'
                       }
                       alt={name}
                       width={200}

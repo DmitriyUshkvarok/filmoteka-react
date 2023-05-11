@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import {
   CardsLoader,
   SelectWrapper,
@@ -13,6 +13,7 @@ import MoviesList from 'components/MoviesList/MoviesList';
 import ButtonLoadMore from 'components/ButtonLoadMore/ButtonLoadMore';
 import Container from 'components/Container/Container';
 import { animateScroll as scroll } from 'react-scroll';
+import { LanguageContext } from 'components/context/languageContext';
 
 function SearchByYears() {
   const [selectedYear, setSelectedYear] = useState(0);
@@ -21,13 +22,18 @@ function SearchByYears() {
   const [loading, setLoading] = useState(false);
   const [page, setPage] = useState(1);
   const [showButton, setShowButton] = useState(false);
+  const { selectedLanguage } = useContext(LanguageContext);
 
   useEffect(() => {
     if (selectedYear !== 0) {
       const fetchMovies = async () => {
         setLoading(true);
         try {
-          const newMovies = await apiTheMovieDB.fetchByYear(page, selectedYear);
+          const newMovies = await apiTheMovieDB.fetchByYear(
+            page,
+            selectedYear,
+            selectedLanguage.iso_639_1
+          );
           if (newMovies.length === 0) {
             setShowButton(false);
             if (page === 1) {
@@ -49,7 +55,7 @@ function SearchByYears() {
 
       fetchMovies();
     }
-  }, [page, selectedYear]);
+  }, [page, selectedLanguage, selectedYear]);
 
   if (error) {
     return <p>{error.message}</p>;

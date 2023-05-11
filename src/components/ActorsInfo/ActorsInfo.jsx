@@ -1,6 +1,6 @@
 import Container from 'components/Container/Container';
 import { toast } from 'react-toastify';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import apiTheMovieDB from 'service/kino-api';
 import { useParams } from 'react-router-dom';
 import {
@@ -17,6 +17,7 @@ import {
   ActorsPopularity,
   BtnReadMore,
 } from './ActorsInfo.styled';
+import { LanguageContext } from 'components/context/languageContext';
 
 const ActorsInfo = () => {
   const { id } = useParams();
@@ -24,11 +25,12 @@ const ActorsInfo = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [showFullBio, setShowFullBio] = useState(false);
+  const { selectedLanguage } = useContext(LanguageContext);
   const MAX_BIO_LENGTH = 300;
 
   useEffect(() => {
     apiTheMovieDB
-      .fetchActorInfoAndMovies(id)
+      .fetchActorInfoAndMovies(id, selectedLanguage.iso_639_1)
       .then(res => {
         setActorsInfo(res);
       })
@@ -39,7 +41,7 @@ const ActorsInfo = () => {
       .finally(() => {
         setLoading(false);
       });
-  }, [id]);
+  }, [id, selectedLanguage]);
 
   if (error) {
     return <p>{error.message}</p>;

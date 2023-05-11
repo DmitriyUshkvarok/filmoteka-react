@@ -28,6 +28,12 @@
     align-items: center;
 }
 
+.WrapperLangAndTheme {
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+}
+
 .logo {
     display: flex;
     align-items: center;

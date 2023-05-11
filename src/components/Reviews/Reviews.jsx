@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useContext } from 'react';
 import apiTheMovieDB from 'service/kino-api';
 import CommentForm from 'components/CommentForm/CommentForm';
 import {
@@ -18,10 +18,14 @@ import {
   SpanAuthor,
   CommentFormList,
   CommentFormItem,
+  DateInfo,
 } from './Reviews.styled';
 import Container from 'components/Container/Container';
 import { useSelector } from 'react-redux';
 import authSelector from 'redux/auth/auth-selector';
+import { toast } from 'react-toastify';
+import moment from 'moment';
+import { LanguageContext } from 'components/context/languageContext';
 
 function Review() {
   const { movieId } = useParams();
@@ -30,10 +34,11 @@ function Review() {
   const [error, setError] = useState(null);
   const [comments, setComments] = useState([]);
   const token = useSelector(authSelector.selectToken);
+  const { selectedLanguage } = useContext(LanguageContext);
 
   useEffect(() => {
     apiTheMovieDB
-      .fetchMovieReview(movieId)
+      .fetchMovieReview(movieId, selectedLanguage.iso_639_1)
       .then(data => {
         setReviews(data);
       })
@@ -42,7 +47,7 @@ function Review() {
         setIsLoading(false);
       })
       .finally(setIsLoading(false));
-  }, [movieId]);
+  }, [movieId, selectedLanguage]);
 
   useEffect(() => {
     axios
@@ -66,6 +71,12 @@ function Review() {
 
   const handleSubmit = data => {
     const { name, number } = data;
+
+    if (!name || !number) {
+      toast.error('Please fill in all fields!');
+      return;
+    }
+
     const config = {
       headers: {
         Authorization: `Bearer ${token}`,
@@ -110,20 +121,29 @@ function Review() {
         <CommentForm onSubmit={handleSubmit} />
         <ReviewAndCommentWrapper>
           <CommentFormList>
-            {comments.map(comment => (
-              <CommentFormItem key={comment.id}>
-                <StyleFaTrashAlt
-                  onClick={() => handleDeleteComment(comment.id)}
-                  size={20}
-                  color="red"
-                />
-                <AuthorWrapper>
-                  <SpanAuthor>Author:</SpanAuthor>
-                  <CommentAuthorName>{comment.name}</CommentAuthorName>
-                </AuthorWrapper>
-                <CommentAuthorText>{comment.number}</CommentAuthorText>
-              </CommentFormItem>
-            ))}
+            {comments.length > 0 ? (
+              comments.map(comment => (
+                <CommentFormItem key={comment.id}>
+                  <StyleFaTrashAlt
+                    onClick={() => handleDeleteComment(comment.id)}
+                    size={20}
+                    color="red"
+                  />
+                  <AuthorWrapper>
+                    <SpanAuthor>Author:</SpanAuthor>
+                    <CommentAuthorName>{comment.name}</CommentAuthorName>
+                  </AuthorWrapper>
+                  <CommentAuthorText>{comment.number}</CommentAuthorText>
+                  <DateInfo>
+                    {moment(comment.created_at).format(
+                      'MMMM Do YYYY, h:mm:ss a'
+                    )}
+                  </DateInfo>
+                </CommentFormItem>
+              ))
+            ) : (
+              <InfoDiscription>No comments found</InfoDiscription>
+            )}
           </CommentFormList>
           <ReviewList>
             {reviews && reviews.length > 0 ? (

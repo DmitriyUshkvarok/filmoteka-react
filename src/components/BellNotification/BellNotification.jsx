@@ -11,10 +11,11 @@ import {
 } from './BellNotification.styled';
 import { TbBellPlusFilled, TbBellMinusFilled } from 'react-icons/tb';
 import apiTheMovieDB from 'service/kino-api';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import ButtonLoadMore from 'components/ButtonLoadMore/ButtonLoadMore';
 import { toast } from 'react-toastify';
+import { LanguageContext } from 'components/context/languageContext';
 
 const BellNotification = () => {
   const location = useLocation();
@@ -26,11 +27,12 @@ const BellNotification = () => {
   const [showList, setShowList] = useState(false);
   const [viewed, setViewed] = useState(false);
   const [showButton, setShowButton] = useState(false);
+  const { selectedLanguage } = useContext(LanguageContext);
 
   useEffect(() => {
     if (showList) {
       apiTheMovieDB
-        .fetchNewMoviesNotification(page)
+        .fetchNewMoviesNotification(page, selectedLanguage.iso_639_1)
         .then(movies => {
           setMovies(prevMovies => [...prevMovies, ...movies]);
           if (movies.length === 0) {
@@ -50,7 +52,7 @@ const BellNotification = () => {
         })
         .finally(() => setLoading(false));
     }
-  }, [page, showList]);
+  }, [page, selectedLanguage, showList]);
 
   if (error) {
     return <p>{error.message}</p>;
@@ -101,30 +103,32 @@ const BellNotification = () => {
               {loading ? (
                 <CardsLoader size={50} />
               ) : (
-                movies.map(({ poster_path, title, id, release_date }) => (
-                  <Link
-                    key={`${id}`}
-                    to={`/movies/${id}`}
-                    state={{ from: location }}
-                    onClick={closeListNavigate}
-                  >
-                    <BellListItem key={id}>
-                      <BellImg
-                        src={
-                          poster_path
-                            ? `https://image.tmdb.org/t/p/w500/${poster_path}`
-                            : 'https://via.placeholder.com/200x300'
-                        }
-                        alt={title}
-                        width={50}
-                      />
-                      <BellTitle>
-                        {title ? title : 'Movie without a title'}
-                      </BellTitle>
-                      <BellDateRelis>{release_date}</BellDateRelis>
-                    </BellListItem>
-                  </Link>
-                ))
+                movies.map(
+                  ({ poster_path, title, id, release_date }, index) => (
+                    <Link
+                      key={`${id}${index}`}
+                      to={`/movies/${id}`}
+                      state={{ from: location }}
+                      onClick={closeListNavigate}
+                    >
+                      <BellListItem key={id}>
+                        <BellImg
+                          src={
+                            poster_path
+                              ? `https://image.tmdb.org/t/p/w500/${poster_path}`
+                              : 'https://dummyimage.com/100x150/fff/aaa'
+                          }
+                          alt={title}
+                          width={50}
+                        />
+                        <BellTitle>
+                          {title ? title : 'Movie without a title'}
+                        </BellTitle>
+                        <BellDateRelis>{release_date}</BellDateRelis>
+                      </BellListItem>
+                    </Link>
+                  )
+                )
               )}
             </BellList>
             {showButton && <ButtonLoadMore hendleIncrement={hendleIncrement} />}
