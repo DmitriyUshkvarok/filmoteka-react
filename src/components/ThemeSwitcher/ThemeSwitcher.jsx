@@ -1,5 +1,7 @@
 import { useSelector, useDispatch } from 'react-redux';
-import { FaSun, FaMoon } from 'react-icons/fa';
+import { FaCloudMoon } from 'react-icons/fa';
+import { BsFillCloudSunFill } from 'react-icons/bs';
+
 import { toggleTheme } from 'redux/themeSlice';
 import { BtnSwitcher, SwitcherWrapper } from './ThemeSwitcher.styled';
 import { useEffect } from 'react';
@@ -21,7 +23,11 @@ const ThemeSwitcher = () => {
   return (
     <SwitcherWrapper>
       <BtnSwitcher onClick={handleThemeToggle}>
-        {isDarkMode ? <FaMoon size={16} /> : <FaSun size={16} />}
+        {isDarkMode ? (
+          <FaCloudMoon size={16} />
+        ) : (
+          <BsFillCloudSunFill size={16} />
+        )}
       </BtnSwitcher>
     </SwitcherWrapper>
   );
