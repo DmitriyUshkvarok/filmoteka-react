@@ -18,6 +18,7 @@ const UserBar = () => {
       'No',
       () => {
         dispatch(authOperation.logOut());
+        //
       },
       () => {}
     );
